@@ -1,0 +1,48 @@
+<h2>Course Codes</h2>
+<ul class="circle">
+    <ul>
+      {{#each model as |oneCourseCode|}}
+        <div class="row model-item">
+          <div class="large-12 columns">
+            
+            
+            
+            <div class='row'>
+              <div class='editItem' {{action 'selectThis' oneCourseCode.id}}>{{oneCourseCode.code}} {{oneCourseCode.number}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneCourseCode.id}}>Edit</a>
+            </div> 
+              
+            
+            {{oneCourseCode.name}}
+            
+            
+            
+            {{#if (eq oneCourseCode.id currentID)}}
+              <br>
+              Units: {{oneCourseCode.unit}}
+              <br>
+              <br>
+              <label>Code
+                {{input value=oneCourseCode.code type="text"}}
+              </label>
+              <label>Number
+                {{input value=oneCourseCode.number type="text"}}
+              </label>  
+              <label>Name
+                {{input value=oneCourseCode.name type="text"}}
+              </label>
+              <label>Unit
+                {{input value=oneCourseCode.unit type="text"}}
+              </label>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateCourseCode' oneCourseCode.id oneCourseCode.code oneCourseCode.number oneCourseCode.name oneCourseCode.unit}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteCourse' oneCourseCode}}>Delete</a>
+
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </ul>
+</ul>
+{{purple.add-course-code}}

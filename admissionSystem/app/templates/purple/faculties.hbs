@@ -1,0 +1,31 @@
+<h2>Faculties</h2>
+<ul class="circle">
+    <ul>
+      {{#each model as |oneFacultyCode|}}
+
+          <div class="row model-item">
+            <div class="large-12 columns">
+            
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneFacultyCode.id}}>{{oneFacultyCode.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneFacultyCode.id}}>Edit</a>
+              </div>
+              {{#if (eq oneFacultyCode.id currentID)}}
+              
+              <br>
+              <label>Faculty Name
+                {{input value=oneFacultyCode.name type="text"}}
+              </label>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateFaculty' oneFacultyCode.id oneFacultyCode.name}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteFaculty' oneFacultyCode}}>Delete</a>
+
+            {{/if}}
+            </div>
+          </div>
+          
+      {{/each}}
+    </ul>
+</ul>
+{{purple.add-faculty}}

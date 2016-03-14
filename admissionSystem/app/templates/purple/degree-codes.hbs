@@ -1,0 +1,32 @@
+<h2>Degree Codes</h2>
+<ul class="circle">
+    <ul>
+      {{#each model as |oneDegCode|}}
+          <div class="row model-item">
+            <div class="large-12 columns">
+              <div class='row'>
+                
+              
+              
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneDegCode.id}}>{{oneDegCode.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneDegCode.id}}>Edit</a>
+              </div>
+              {{#if (eq oneDegCode.id currentID)}}
+              
+              <label>Degree Code
+                {{input value=oneDegCode.name type="text"}}
+              </label>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateDegCode' oneDegCode.id oneDegCode.name}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteDegCode' oneDegCode}}>Delete</a>
+
+            {{/if}}
+            </div>  
+          </div>
+        </div>
+      {{/each}}
+    </ul>
+</ul>
+{{purple.add-degree-code}}

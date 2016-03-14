@@ -1,0 +1,24 @@
+<h2>Term Codes</h2>
+<ul class="circle">
+    <ul>
+      {{#each model as |oneTerm|}}
+        <div class="row model-item">
+          <div class="large-12 columns">
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneTerm.id}}>{{oneTerm.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneTerm.id}}>Edit</a>
+              </div>  
+                {{#if (eq oneTerm.id currentID)}}
+                  <label>Name
+                    {{input value=oneTerm.name type="text"}}
+                  </label>
+                  <a href="#" class="button tiny" {{action 'updateTermCode' oneTerm.name oneTerm.id}}>Save</a>
+                  <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+                  <a href="#" class="button tiny" {{action 'deleteTermCode'  oneTerm}}>Delete</a>
+                {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </ul>
+</ul>
+
+{{purple.add-term-code}}

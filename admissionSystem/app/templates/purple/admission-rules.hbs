@@ -1,0 +1,18 @@
+<h2>Admission Rules</h2>
+<ul class="circle">
+    <ul>
+      {{#each model.rule as |one|}}
+      <div class="large-12 columns">
+          <div class="large-8 columns">
+              <li>
+                {{one.description}}
+              </li>
+          </div>
+          <div class="large-4 columns">
+            {{purple.delete-admission-rule ID = one.id}}
+          </div>
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+{{purple.add-admission-rule model = model}}

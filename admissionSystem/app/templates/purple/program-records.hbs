@@ -1,0 +1,21 @@
+<h2>Program Records</h2>
+<ul class="circle">
+    <ul>
+      {{#each model.programRecord as |oneRecord|}}
+          <div class="large-12 columns">
+            <div class="large-8 columns">
+                <li>
+                  {{oneRecord.degree.name}}-{{oneRecord.term.name}} - {{oneRecord.programStatus}} 
+                  - {{oneRecord.level}} level - {{oneRecord.comment}}
+                </li>
+            </div>
+            <div class="large-4 columns">
+              {{purple.delete-program-record ID = oneRecord.id}}
+            </div>
+            
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+
+{{purple.add-program-record model = model}}

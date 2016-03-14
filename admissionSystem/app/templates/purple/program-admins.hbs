@@ -1,0 +1,20 @@
+<h2>Program Administration</h2>
+<ul class="circle">
+    <ul>
+      {{#each model.programAdmin as |oneAdmin|}}
+          <div class="large-12 columns">
+            <div class="large-8 columns">
+                <li>
+                  {{oneAdmin.name}} - {{oneAdmin.position}}
+                </li>
+            </div>
+            <div class="large-4 columns">
+              {{purple.delete-program-admin ID = oneAdmin.id}}
+            </div>
+            
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+
+{{purple.add-program-admin model = model}}

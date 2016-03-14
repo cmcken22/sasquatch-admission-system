@@ -1,0 +1,30 @@
+<h2>Countries</h2>
+<ul class="circle">
+    <ul>
+      {{#each model as |oneCountry|}}
+          
+          <div class="row model-item">
+            <div class="large-12 columns">
+            
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneCountry.id}}>{{oneCountry.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneCountry.id}}>Edit</a>
+              </div>
+              {{#if (eq oneCountry.id currentID)}}
+              
+              <br>
+              <label>Sex
+                {{input value=oneCountry.name type="text"}}
+              </label>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateCountry' oneCountry.id oneCountry.name}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteCountry' oneCountry}}>Delete</a>
+
+            {{/if}}
+            </div>
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+{{green.add-country}}

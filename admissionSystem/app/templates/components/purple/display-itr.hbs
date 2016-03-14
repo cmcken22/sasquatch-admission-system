@@ -1,0 +1,46 @@
+<h2>Student ITR</h2>
+
+<div class="row">
+    <div class="large-12 columns">
+    {{!-----------------------SELECT PROVINCE-------------------------}}
+    <select onchange={{action "setStudent" value="target.value"}}>
+                <option value=100>Select Student</option>
+              {{#each model.student as |oneStudent|}}
+                    <option value={{oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</option>
+              {{/each}}
+        </select>
+    </div>
+</div><br>
+
+
+{{#each model.student as |oneStudent|}}
+    
+    {{#if (eq oneStudent.id student)}}
+        <h3>{{oneStudent.firstName}}</h3>
+            
+            {{#each model.itr as |oneItr|}}
+                
+                <div class="large-6 columns">
+        
+                    {{#if (eq oneItr.student.id oneStudent.id)}}
+                        {{oneItr.program.programName}}, Preference order: {{oneItr.order}}, 
+                        eligibility: 
+                        {{#if (eq oneItr.eligibility '1')}}
+                            Y 
+                        {{else}}
+                            N
+                        {{/if}}
+                    {{/if}}
+                    
+                </div>
+           
+                    {{#if (eq oneItr.student.id oneStudent.id)}}
+                        <div class="large-6 columns">
+                            {{purple.delete-itr ID = oneItr.id}} 
+                        </div>
+                    {{/if}}
+                    
+            {{/each}}
+    {{/if}}
+        
+{{/each}}

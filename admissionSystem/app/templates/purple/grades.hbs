@@ -1,0 +1,30 @@
+<h2>Grades</h2>
+
+<ul class="circle">
+    <ul>
+      {{#each studentModel as |oneStudent|}}
+        
+        {{#if oneStudent.marks.length}}
+          <h4>{{oneStudent.firstName}} - {{oneStudent.lastName}}</h4>
+        {{/if}}
+      
+        {{#each oneStudent.marks as |oneGrade|}}
+          <div class="large-12 columns">
+            <div class="large-10 columns">
+               
+                
+                {{oneGrade.course.name}} - {{oneGrade.mark}}
+              
+            </div>
+            <div class="large-2 columns">
+              {{purple.delete-grade ID = oneGrade.id}}
+            </div>
+            
+          </div>
+          {{/each}}
+      {{/each}}
+    </ul>
+</ul>
+
+{{purple.add-grade model = model}}
+

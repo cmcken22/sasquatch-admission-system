@@ -1,0 +1,167 @@
+#application-content{
+    max-width:1000px !important;
+    margin:30px auto !important;
+    background-color:white;
+    padding:10px;
+    box-shadow:0 10px 10px #666;
+}
+
+
+body{
+    background-image:url('/images/Background.gif');
+    background-color:#eee;
+    background-repeat:no-repeat;
+}
+/* Navigation*/
+
+.top-bar{
+    background-color:#4F2683 !important;
+    border-bottom: 2px solid #807F83;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4f2e84), to(#380e6e));
+}
+.top-bar-section ul li:hover{
+    background-color:white !important;
+    color:#807F83 !important;
+}
+.top-bar{
+    border: 2px solid #807F83;
+    margin-top:10px;
+    height:50px !important;
+}
+.top-bar-section ul li .dropdown{
+    padding:3px;
+    border:1px solid #807F83;
+}
+.top-bar-section ul li a{
+    font-size:14px !important;
+}
+.top-bar-section ul li .dropdown,
+.top-bar-section ul li .dropdown li{
+    background-color:white !important;
+}
+.top-bar-section ul li .dropdown li a{
+    color:#807F83 !important;
+    border-bottom: #807F83 dotted 1px !important;
+}
+.top-bar-section ul li .dropdown li:hover a{
+    color:#4F2683 !important;
+}
+.top-bar-section ul li .dropdown li:last-child a{
+    border-bottom:0px !important;
+}
+.top-bar-section ul li,
+.top-bar-section ul li a{
+    height:46px !important;
+    background-color:transparent !important;
+}
+#current-user h2{
+    margin:8px;
+    font-size:24px;
+    color:white;
+}
+#logout-button a{
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: normal;
+    color:white !important;
+}
+.top-bar-section ul li:hover:not(.has-form) > a,
+#logout-button:hover a,
+.top-bar-section ul li a:hover{
+    color: #807F83 !important;
+}
+.button{
+    margin-bottom:15px !important;
+    background-color:#807F83 !important;
+    border-color:#807F83 !important;
+}
+.button:hover{
+    background-color:#4F2683 !important;
+    border-color:#4F2683 !important;
+}
+
+/*Footer*/
+#footer{
+    background-color:#4e2583;
+    padding:20px 0px;
+}
+#footer,#footer a{
+    color:white !important;
+    font-size:12px;
+}
+#footer a:hover{
+    color:#807F83 !important;
+}
+.grid_5{
+    width:39.666% !important;
+}
+.grid_2{
+    width:14.666% !important;
+}
+.grid_2,
+.grid_5{
+    float:left;
+    margin-left:1%;
+    margin-right:1%;
+}
+
+
+/*Add student*/
+
+.model-item{
+    border-bottom:1px solid #4F2683;
+    margin-bottom:20px !important;
+    padding-bottom:10px !important;
+    margin-right:50px !important;
+}
+.edit-button{
+    float:right;
+}
+.model-item .button.tiny:last-child{
+    float:right;
+}
+.model-item:last-child{
+    border-bottom:0px !Important;
+}
+#bdtable select{
+    min-width:65px;
+}
+#add-student-form{
+    padding:20px;
+    background-color:white;
+}
+
+.editItem{
+    cursor: pointer;
+    color:#008CBA;
+    float:left;
+}
+.editItem:hover{
+    color:#0078a0;
+}
+
+.side-nav{
+    margin:20px 0px;
+    padding:10px;
+    background:none repeat scroll 0 0 #efefef;
+    border:1px solid #ddd;
+}
+.side-nav p{
+    
+    margin-bottom:10px;
+}
+.side-nav-title{
+    border-bottom:3px solid #4F2683;
+    margin-bottom:15px;
+}
+.side-nav-title h4{
+    color:#4F2683;
+}
+input,
+select{
+    line-height:18px;
+    font-size:14px;
+}
+.model-item select{
+    margin-bottom:10px;
+}

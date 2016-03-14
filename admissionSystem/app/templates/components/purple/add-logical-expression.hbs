@@ -1,0 +1,17 @@
+<form id="add-student-form">
+    <h2>Add new Logical Expression</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>Boolean Expression
+              {{input value=booleanExp id="booleanExp" type="text"}}
+            </label>
+            <label>Logical Link
+              {{input value=logicalLink id="logicalLink" type="text"}}
+            </label>
+        </div>
+    </div>
+</form>
+<br>
+<a href="#" class="button radius" {{action 'addLogicalExpression'}}>Save</a>
+
+<a href="#" class="button radius" >Cancel</a>

@@ -1,0 +1,102 @@
+<h2>{{selectedStudent.firstName}} {{selectedStudent.lastName}}</h2>
+<a href="#" class="button radius" {{action 'viewGrades'}}>View Grades</a>
+
+{{#if viewGrades}}
+    {{#each selectedStudent.marks as |oneGrade|}}
+        <h5>{{oneGrade.course.name}} - {{oneGrade.mark}}</h5>
+    {{/each}}
+{{/if}}
+
+{{#if isEditing}}
+    <form>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>First Name
+                  {{input value=selectedStudent.firstName type="text" }}
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>last Name
+                  {{input value=selectedStudent.lastName type="text" }}
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>Student Number
+                  {{input value=selectedStudent.studentNum  id="studentNum" type="text"}}
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>Date of Birth</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <table id='bdtable'>
+                    <tr><th>Day</th><th>Month</th><th>Year</th></tr>
+                    <tr>
+                        <td>
+                            <select onchange={{action "selectDay" value="target.value"}}>
+                                {{#each days as |day|}}
+                                    {{#if (eq currentDay day)}}
+                                        <option selected='selected' value={{day}}>{{day}}</option>
+                                    {{else}}
+                                        <option value={{day}}>{{day}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </td>
+                        
+                        <td>
+                            <select onchange={{action "selectMonth" value="target.value"}}>
+                                {{#each months as |month|}}
+                                    {{#if (eq currentMonth month)}}
+                                        <option selected='selected' value={{month}}>{{month}}</option>
+                                    {{else}}
+                                        <option value={{month}}>{{month}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </td>
+                        
+                        <td>
+                            <select onchange={{action "selectYear" value="target.value"}}>
+                                {{#each years as |year|}}
+                                    {{#if (eq currentYear year)}}
+                                        <option selected='selected' value={{year}}>{{year}}</option>
+                                    {{else}}
+                                        <option value={{year}}>{{year}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>   
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+    <br>
+    <a href="#" class="button radius" {{action 'save' selectedStudent.id day month year}}>Save</a>
+    <a href="#" class="button radius" {{action 'cancel'}}>Cancel</a>
+{{else}}
+    <ul class="square">
+        <ul>
+            <li>{{selectedStudent.firstName}} {{selectedStudent.lastName}}</li>
+            <li>{{selectedStudent.studentNum}}</li>
+            <li>{{selectedStudent.DOB}}</li>
+            <li>{{selectedStudent.gender.sex}}</li>
+            <li>{{selectedStudent.residency.residency}}</li>
+            <li>{{selectedStudent.load.load}}</li>
+            <li>{{selectedStudent.city.name}}, {{selectedStudent.city.province.name}}, {{selectedStudent.city.province.country.name}}</li>
+        </ul>
+    </ul>
+    <br>
+    <a href="#" class="button radius" {{action 'edit' selectedStudent.DOB}}>Edit</a>
+    <a href="#" class="button radius" {{action 'cancel'}}>Cancel</a>
+    {{!--<a href="#" class="button radius" {{action 'update'}}>update</a>--}}
+{{/if}}

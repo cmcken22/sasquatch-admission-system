@@ -1,0 +1,15 @@
+<form id="add-student-form">
+        <h2>Add new Residency</h2>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>Residency
+                  {{input value=residency  id="residency" type="text"}}
+                </label>
+            </div>
+        </div>
+    </form>
+    <br>
+    <a href="#" class="button radius" {{action 'addResidency' residency}}>Save</a>
+    
+    {{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+    <a href="#" class="button radius" >Cancel</a>

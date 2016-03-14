@@ -1,0 +1,21 @@
+<h2>Logical Expressions</h2>
+
+<ul class="circle">
+    <ul>
+      {{#each model as |one|}}
+          <div class="large-12 columns">
+            <div class="large-8 columns">
+                <li>
+                  {{one.booleanExp}} {{one.logicalLink}} 
+                </li>
+            </div>
+            <div class="large-4 columns">
+              {{purple.delete-logical-expression ID = one.id}}
+            </div>
+            
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+
+{{purple.add-logical-expression model = model}}

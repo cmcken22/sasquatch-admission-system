@@ -1,0 +1,157 @@
+{{!--{{#if isEditing}}--}}
+    <form id="add-student-form">
+        <h2>Add new Student</h2>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>First Name
+                  {{input value=firstName  id="firstName" type="text"}}
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <label>Last Name
+                  {{input value=lastName id="lastName" type="text"}}
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                {{!------------------------ENTER SNUM-------------------------}}
+                <label>Student Number
+                  {{input value=studentNum  id="studentNum" type="text"}}
+                </label>
+            </div>
+        </div>
+         <div class="row">
+            <div class="large-12 columns">
+            {{!--------------------------SELECT RES---------------------------}}
+                <select onchange={{action "setRes" value="target.value"}}>
+                    <option value=99>Select Residency</option>
+                        {{#each model.res as |oneRes|}}
+                            <option value={{oneRes.id}}>{{oneRes.residency}}</option>
+                        {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!------------------------SELECT GENDER--------------------------}}
+            <select onchange={{action "setSex" value="target.value"}}>
+                        <option value=100>Select Gender</option>
+                      {{#each model.genders as |oneGender|}}
+                        <option value={{oneGender.id}}>{{oneGender.sex}}</option>
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!--------------------------SELECT LOAD--------------------------}}       
+            <select onchange={{action "setLoad" value="target.value"}}>
+                        <option value=100>Select Load</option>
+                      {{#each model.load as |oneload|}}
+                        <option value={{oneload.id}}>{{oneload.load}}</option>
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        
+        <div class="row">
+            <div class="large-12 columns">
+            {{!------------------------SELECT COUNTRY-------------------------}}
+            <select onchange={{action "setCountry" value="target.value"}}>
+                        <option value=100>Select Country</option>
+                      {{#each model.countries as |oneCountry|}}
+                        <option value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!-----------------------SELECT PROVINCE-------------------------}}
+            <select onchange={{action "setProvince" value="target.value"}}>
+                        <option value=100>Select Province</option>
+                      {{#each model.provinces as |oneProvince|}}
+                            {{#if (eq oneProvince.country.id country)}}
+                            <option value={{oneProvince.id}}>{{oneProvince.name}}</option>
+                            {{/if}}
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!--------------------------SELECT CITY--------------------------}}
+            <select onchange={{action "setCity" value="target.value"}}>
+                        <option value=100>Select City</option>
+                      {{#each model.cities as |oneCity|}}
+                            {{#if (eq oneCity.province.id province)}}
+                            <option value={{oneCity.id}}>{{oneCity.name}}</option>
+                            {{/if}}
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        
+        <div class="row">
+            <div class="large-12 columns">
+                <label>Date of Birth</label>
+            </div>
+        </div>
+         <div class="row">
+            <div class="large-12 columns">
+                <table id='bdtable'>
+                    <tr><th>Day</th><th>Month</th><th>Year</th></tr>
+                    <tr>
+                        <td>
+                            <select onchange={{action "selectDay" value="target.value"}}>
+                                {{#each days as |day|}}
+                                    {{#if (eq '01' day)}}
+                                        <option selected='selected' value={{day}}>{{day}}</option>
+                                    {{else}}
+                                        <option value={{day}}>{{day}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </td>
+                        
+                        <td>
+                            <select onchange={{action "selectMonth" value="target.value"}}>
+                                {{#each months as |month|}}
+                                    {{#if (eq '01' month)}}
+                                        <option selected='selected' value={{month}}>{{month}}</option>
+                                    {{else}}
+                                        <option value={{month}}>{{month}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </td>
+                        
+                        <td>
+                            <select onchange={{action "selectYear" value="target.value"}}>
+                                {{#each years as |year|}}
+                                    {{#if (eq yyyy year)}}
+                                        <option selected='selected' value={{year}}>{{year}}</option>
+                                    {{else}}
+                                        <option value={{year}}>{{year}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>   
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+       
+    </form>
+    <br>
+    <a href="#" class="button radius" {{action 'saveStudent' day month year sex residency load}}>Save</a>
+    
+    {{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+    <a href="#" class="button radius" {{action 'cancel'}}>Cancel</a>
+
+{{!--{{else}}--}}
+{{!--    <a href="#" class="button round" {{action 'addNewStudent'}}>Add Student</a>--}}
+{{!--{{/if}}--}}

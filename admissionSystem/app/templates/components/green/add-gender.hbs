@@ -1,0 +1,15 @@
+<form id="add-student-form">
+    <h2>Add new Gender</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>Gender
+              {{input value=sex  id="sex" type="text"}}
+            </label>
+        </div>
+    </div>
+</form>
+<br>
+<a href="#" class="button radius" {{action 'addGender' sex}}>Save</a>
+
+{{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+<a href="#" class="button radius" >Cancel</a>

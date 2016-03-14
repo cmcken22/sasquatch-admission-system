@@ -1,0 +1,97 @@
+{{#if oudaAuth.isAuthenticated}}
+<div id="application-content">        
+        <nav class="top-bar" data-topbar data-options="is_hover: true" role="navigation">
+          <ul class="title-area">
+            <li class="name left">
+              <h1>{{#link-to 'welcome'}}<img src='/images/WElogo.png' style= "height:40px; width: auto; margin-top: 0px">{{/link-to}}</h1>
+            </li>
+            <li id="current-user" class="left">
+              {{!--<h2>Welcome: {{oudaAuth.userName}}</h2>--}}
+            </li>
+          </ul>
+        
+          <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+              <li>{{#link-to 'welcome'}}Home{{/link-to}}</li>
+              <li>{{#link-to 'students'}}Students{{/link-to}}</li>
+              <li>{{#link-to 'purple.programs'}}Codes{{/link-to}}</li>
+              <li>{{#link-to 'purple.itrs'}}ITR{{/link-to}}</li>
+              
+              <li class="has-dropdown not-click"><a>Codes</a>
+                <ul class="dropdown">
+                  <li>{{#link-to 'purple.faculties'}}Edit Faculties{{/link-to}}</li>
+                  <li>{{#link-to 'purple.departments'}}Edit Departments{{/link-to}}</li>
+                  <li>{{#link-to 'purple.program-admins'}}Edit Program Administraions{{/link-to}}</li>
+
+                  <li>{{#link-to 'purple.distribution-results'}}Add Distribution Result{{/link-to}}</li>
+                  <li>{{#link-to 'purple.program-records'}}Edit Program Records{{/link-to}}</li>
+                  <li>{{#link-to 'purple.logical-expressions'}}Add Logical Expression{{/link-to}}</li>
+                  <li>{{#link-to 'purple.admission-rules'}}Add Admission Rule{{/link-to}}</li>
+                  {{!--<li>{{#link-to 'purple.grades'}}Edit Student Grades{{/link-to}}</li>--}}
+                </ul>
+              </li>
+              
+              <li>{{#link-to 'purple.grades'}}Grades{{/link-to}}</li>
+              
+              {{!--<li class="has-dropdown not-click"><a>Upload Data</a>--}}
+              {{!--  <ul class="dropdown">--}}
+              {{!--    <li>Upload Student List</li>--}}
+              {{!--  </ul>--}}
+              {{!--</li>--}}
+              
+              <li id="logout-button"> {{log-out}} </li>
+            </ul>
+          </section>
+        </nav>
+        
+        <div class="row">
+            <div class="large-12 columns">
+              {{outlet}}
+            </div>
+        </div>
+        
+        <footer id="footer" class="row">
+            <div class="large-12 columns">
+                
+                <div class="grid_5">
+                    <strong>© 1878 - 2016 Western University</strong><br><br>
+                    Communications and Public Affairs<br>
+                    360 Westminster Hall<br>
+                    London, Ontario, Canada, N6A 3K7<br>
+                    Tel: 519-661-2111<br>
+                    <a href="mailto:web@uwo.ca">web@uwo.ca</a><br>
+                    <a href="http://www.uwo.ca/univsec/privacy/index.html" target="_blank">Privacy</a> | 
+                    <a href="http://communications.uwo.ca/comms/web_design/standards/index.html" target="_blank">Web Standards</a> | 
+                    <a href="http://communications.uwo.ca/comms/terms_of_use.html" target="_blank">Terms of Use</a>  | 
+                    <a href="http://accessibility.uwo.ca/" target="_blank">Accessibility</a>
+                </div> 
+    
+                <div class="grid_2">
+                   <strong>Key Topics:</strong><br><br>
+                   <a href="../news_publications/index.html">News & Publications</a><br>
+                   <a href="http://mediarelations.uwo.ca/" target="_blank">Media Relations</a><br>
+                   <a href="../portfolio/index.html">Portfolio </a><br>
+                   <a href="../web_design/index.html">Web Design</a><br>
+                   <a href="index.html">Western Brand</a><br>
+                   <a href="../our_teams/index.html">Our Teams</a><br>
+                </div> <!--end div grid_2-->
+    
+                <div class="grid_2">
+                    <strong>Popular Resources:</strong><br><br>
+                    <a href="https://www.uwo.ca/its/mobile-doc/" target="_blank">Mobile App</a><br>
+                    <a href="http://communications.uwo.ca/westernnews/index.html" target="_blank">Western News</a><br>
+                    <a href="http://www.alumnigazette.ca/" target="_blank">Alumni Gazette</a><br>
+                    <a href="vis_toolkit/index.html">Visual Identity Toolkit</a><br>
+                </div> <!--end div grid_2-->
+                
+                <div class="footer-logos">
+                    <a href="http://www.uwo.ca" target="_blank" title="Western Home Page"><img align="right" alt="Western University Crest" height="120" id="footer-logo" src="/images/SASquatch_logo.png" width="120"></a>
+                </div> <!--end div grid_2-->
+                
+            </div>
+        </footer>
+</div>
+{{else}}
+  {{outlet "login"}}
+{{/if}}

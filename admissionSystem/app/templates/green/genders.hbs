@@ -1,0 +1,29 @@
+<h2>Genders</h2>
+<ul class="circle">
+    <ul>
+      {{#each model as |oneGender|}}
+          <div class="row model-item">
+            <div class="large-12 columns">
+            
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneGender.id}}>{{oneGender.sex}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneGender.id}}>Edit</a>
+              </div>
+              {{#if (eq oneGender.id currentID)}}
+              
+              <br>
+              <label>Sex
+                {{input value=oneGender.sex type="text"}}
+              </label>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateGender' oneGender.id oneGender.sex}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteGender' oneGender}}>Delete</a>
+
+            {{/if}}
+            </div>
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+{{green.add-gender}}

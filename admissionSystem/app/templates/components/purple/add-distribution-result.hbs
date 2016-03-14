@@ -1,0 +1,92 @@
+<form id="add-student-form">
+    
+    <h1>Add Distribution Result</h1>
+    
+    <select onchange={{action "setStudent" value="target.value"}}>
+        <option value=100>Select Student</option>
+
+        {{#each model.student as |oneStudent|}}
+            <option value={{oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</option>
+        {{/each}}
+     </select>
+     
+     <select onchange={{action "setComment" value="target.value"}}>
+        <option value=100>Select Comment Code</option>
+
+        {{#each model.comment as |oneComment|}}
+            <option value={{oneComment.id}}>{{oneComment.code}} {{oneComment.description}}</option>
+        {{/each}}
+     </select>
+     
+    <div class="row">
+        <div class="large-12 columns">
+            <table id='bdtable'>
+                <tr><th>Day</th><th>Month</th><th>Year</th></tr>
+                <tr>
+                    <td>
+                        <select onchange={{action "selectDay" value="target.value"}}>
+                            {{#each days as |day|}}
+                                {{#if (eq dd day)}}
+                                    {{#if (or (eq day '1') (eq day '2') (eq day '3') (eq day '4') (eq day '5') (eq day '6') (eq day '7') (eq day '8') (eq day '9'))}}
+                                        <option selected='selected' value={{day}}>0{{day}}</option>
+                                    {{else}}
+                                        <option selected='selected' value={{day}}>{{day}}</option>
+                                    {{/if}}
+                                    {{!--<option selected='selected' value={{day}}>{{day}}</option>--}}
+                                {{else}}
+                                    {{#if (or (eq day '1') (eq day '2') (eq day '3') (eq day '4') (eq day '5') (eq day '6') (eq day '7') (eq day '8') (eq day '9'))}}
+                                        <option value={{day}}>0{{day}}</option>
+                                    {{else}}
+                                        <option value={{day}}>{{day}}</option>
+                                    {{/if}}
+                                    {{!--<option value={{day}}>{{day}}</option>--}}
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    </td>
+                    
+                    <td>
+                        <select onchange={{action "selectMonth" value="target.value"}}>
+                            {{#each months as |month|}}
+                            
+                                {{#if (eq mm month)}}
+                                    {{#if (or (eq month '1') (eq month '2') (eq month '3') (eq month '4') (eq month '5') (eq month '6') (eq month '7') (eq month '8') (eq month '9'))}}
+                                        <option selected='selected' value={{month}}>0{{month}}</option>
+                                    {{else}}
+                                        <option selected='selected' value={{month}}>{{month}}</option>
+                                    {{/if}}
+                                    {{!--<option selected='selected' value={{month}}>{{month}}</option>--}}
+                                {{else}}
+                                    {{#if (or (eq month '1') (eq month '2') (eq month '3') (eq month '4') (eq month '5') (eq month '6') (eq month '7') (eq month '8') (eq month '9'))}}
+                                        <option value={{month}}>0{{month}}</option>
+                                    {{else}}
+                                        <option value={{month}}>{{month}}</option>
+                                    {{/if}}
+                                    {{!--<option value={{month}}>{{month}}</option>--}}
+                                {{/if}}
+                            {{/each}}
+                        </select>
+                    </td>
+                    
+                    <td>
+                        <select onchange={{action "selectYear" value="target.value"}}>
+                            {{#each years as |year|}}
+                                {{#if (eq yyyy year)}}
+                                    <option selected='selected' value={{year}}>{{year}}</option>
+                                {{else}}
+                                    <option value={{year}}>{{year}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select>   
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+</form>
+<br>
+<a href="#" class="button radius" {{action 'addDistributionResult' day month year}}>Save</a>
+
+{{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+<a href="#" class="button radius" >Cancel</a>

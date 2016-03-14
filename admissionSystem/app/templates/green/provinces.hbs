@@ -1,0 +1,49 @@
+<h2>Provinces</h2>
+<ul class="circle">
+    <ul>
+      {{#each model.province as |oneProvince|}}
+          <div class="row model-item">
+            <div class="large-12 columns">
+            
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneProvince.id}}>{{oneProvince.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneProvince.id}}>Edit</a>
+              </div>
+              {{#if (eq oneProvince.id currentID)}}
+              
+              
+              
+              <label>Province
+                {{input value=oneProvince.name type="text"}}
+              </label>
+             
+              <label>Within which country ?
+                <select onchange={{action 'setCountry' value="target.value"}}>
+                  
+                  
+                   {{#each model.country as |oneCountry|}}
+                     {{#if (eq oneCountry.id country)}}
+                       <option selected value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                      {{/if}}
+                      {{#if (not-eq oneCountry.id country)}}
+                        <option value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                      {{/if}}
+                  {{/each}}
+                </select>
+              </label>
+              
+              <br>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateProvince' oneProvince.id oneProvince.name}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteProvince' oneProvince}}>Delete</a>
+
+            {{/if}}
+            </div>
+          </div>
+          
+      {{/each}}
+    </ul>
+</ul>
+
+{{green.add-province model = model.country}}

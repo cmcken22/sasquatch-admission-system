@@ -1,0 +1,21 @@
+<form id="add-student-form">
+    <h2>Add new Course Code</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>Course Code
+                {{input value=code     id="code"   type="text"}}
+                Course Number
+                {{input value=number   id="number" type="text"}}
+                Course Name
+                {{input value=name     id="name"   type="text"}}
+                Number of Units
+                {{input value=unit     id="unit"   type="text"}}
+            </label>
+        </div>
+    </div>
+</form>
+<br>
+<a href="#" class="button radius" {{action 'addCourseCode' name}}>Save</a>
+
+{{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+<a href="#" class="button radius" >Cancel</a>

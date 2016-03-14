@@ -1,0 +1,72 @@
+<h2>Cities</h2>
+<ul class="circle">
+    <ul>
+      {{#each model.cities as |oneCity|}}
+        
+           <div class="row model-item">
+            <div class="large-12 columns">
+            
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneCity.id oneCity.province}}>{{oneCity.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneCity.id}}>Edit</a>
+              </div>
+              {{#if (eq oneCity.id currentID)}}
+              
+              
+              
+              <label>City
+                {{input value=oneCity.name type="text"}}
+              </label>
+             
+              <label>Within which country ?
+                <select onchange={{action 'setCountry' value="target.value"}}>
+                  
+                  
+                   {{#each model.countries as |oneCountry|}}
+                     {{#if (eq oneCountry.id country)}}
+                       <option selected value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                      {{/if}}
+                      {{#if (not-eq oneCountry.id country)}}
+                        <option value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                      {{/if}}
+                  {{/each}}
+                </select>
+              </label>
+
+
+              <label>Within which Province ?
+               <select onchange={{action 'setProvince' value="target.value"}}>
+                  
+                         {{#if (eq province 100) }}
+                         <option value=100>Select Province</option>
+                      {{/if}} 
+                 
+                  {{#each model.provinces as |oneProvince|}}
+                      
+                     {{#if (eq oneProvince.id province)}}
+                       <option selected value={{oneProvince.id}}>{{oneProvince.name}}</option>
+                      {{/if}}
+                      {{#if (eq oneProvince.country.id country)}}
+                        {{#if (not-eq oneProvince.id province)}}
+                          <option value={{oneProvince.id}}>{{oneProvince.name}}</option>
+                        {{/if}}
+                      {{/if}}
+                  {{/each}}
+               </select>
+              </label>
+              
+              
+              <br>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateCity' oneCity.id oneCity.name}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteCity' oneCity}}>Delete</a>
+
+            {{/if}}
+            </div>
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+
+{{green.add-city model = model}}

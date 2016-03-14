@@ -1,0 +1,25 @@
+<form id="add-student-form">
+    <h2>Add new Province</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>Province
+              {{input value=province  id="province" type="text"}}
+            </label>
+            <label>Within which country ?
+             <select onchange={{action "setCountry" value="target.value"}}>
+                <option value=100>Select Country</option>
+                        
+                {{#each model as |oneCountry|}}
+                <option value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                {{/each}}
+             </select>
+            </label>
+        </div>
+    </div>
+</form>
+<br>
+<a href="#" class="button radius" {{action 'addProvince'}}>Save</a>
+
+{{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+<a href="#" class="button radius" >Cancel</a>
+

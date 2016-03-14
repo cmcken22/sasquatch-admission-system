@@ -1,0 +1,32 @@
+<h2>Residencies</h2>
+
+
+<ul class="circle">
+    <ul>
+      {{#each model as |oneRes|}}
+        <div class="row model-item">
+          <div class="large-12 columns">
+            
+            <div class='row'>
+              <div class='editItem' {{action 'selectThis' oneRes.id}}>{{oneRes.residency}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneRes.id}}>Edit</a>
+            </div> 
+            
+            {{#if (eq oneRes.id currentID)}}
+              
+              <br>
+              <label>Residency
+                {{input value=oneRes.residency type="text"}}
+              </label>
+              
+              
+              <a href="#" class="button tiny" {{action 'updateResidency' oneRes.id oneRes.residency}}>Save</a>
+              <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+              <a href="#" class="button tiny" {{action 'deleteResidency' oneRes}}>Delete</a>
+
+            {{/if}}
+            </div>
+          </div>
+      {{/each}}
+    </ul>
+</ul>
+{{green.add-residency}}

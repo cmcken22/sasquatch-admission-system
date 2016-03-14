@@ -1,0 +1,51 @@
+<form id="add-student-form">
+    
+        <select onchange={{action "setProgram" value="target.value"}}>
+            <option value=100>Select Program</option>
+                    
+            {{#each model.program as |oneProgram|}}
+                <option value={{oneProgram.id}}>{{oneProgram.programName}}</option>
+            {{/each}}
+        </select>
+        <br>
+        <select onchange={{action "setOrder" value="target.value"}}>
+            <option value=100>Select Order Preference</option>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+        </select>
+    
+        <br>
+        <select onchange={{action "setElligibility" value="target.value"}}>
+            <option value=100>Select Elligibility</option>
+            <option value = 1>elligible</option>
+            <option value = 0>not elligible</option>
+            
+        </select>
+        <br>
+            
+        <select onchange={{action "setStudent" value="target.value"}}>
+            <option value=100>Select Student</option>
+                    
+            {{#each model.student as |oneStudent|}}
+                <option value={{oneStudent.id}}>{{oneStudent.firstName}}  {{oneStudent.lastName}}</option>
+            {{/each}}
+         </select>
+    </form>
+    <br>
+    <a href="#" class="button radius" {{action 'addItr' programName}}>Save</a>
+    
+    {{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+    <a href="#" class="button radius" >Cancel</a>
+
+{{!--<select onchange={{action "setProvince" value="target.value"}}>--}}
+{{!--                <option value=100>Select Province</option>--}}
+                        
+{{!--                {{#each model.provinces as |oneProvince|}}--}}
+{{!--                    {{#if (eq oneProvince.country.id country)}}--}}
+{{!--                    <option value={{oneProvince.id}}>{{oneProvince.name}}</option>--}}
+{{!--                    {{/if}}--}}
+{{!--                {{/each}}--}}
+{{!--             </select>--}}

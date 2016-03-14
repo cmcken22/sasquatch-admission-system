@@ -1,0 +1,39 @@
+<h2>Distribution Results</h2>
+  
+  {{!--<select onchange={{action "setStudent" value="target.value"}}>--}}
+  {{!--  <option value=100>Select Student</option>--}}
+  
+  {{!--  {{#each model.student as |oneStudent|}}--}}
+  {{!--      <option value={{oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</option>--}}
+  {{!--  {{/each}}--}}
+  {{!--</select>--}}
+
+{{!--<ul class="circle">--}}
+{{!--    <ul>--}}
+{{!--      {{#each model.distributionResult as |oneResult|}}--}}
+{{!--        {{#if (eq oneResult.student.firstName 'Conner')}}--}}
+{{!--          <div style="padding-bottom:20px;" class="large-12 columns">--}}
+{{!--              <div class="large-10 columns">--}}
+{{!--                  <li>--}}
+{{!--                    {{oneResult.student.firstName}} {{oneResult.student.lastName}}--}}
+{{!--                  </li>--}}
+{{!--                  <li>--}}
+{{!--                    Comment Code: {{oneResult.comment.code}}--}}
+{{!--                  </li>--}}
+{{!--                  <li>--}}
+{{!--                    Description: {{oneResult.comment.description}}--}}
+{{!--                  </li>--}}
+{{!--                  <li>--}}
+{{!--                    Date: {{oneResult.date}}--}}
+{{!--                  </li>--}}
+{{!--              </div>--}}
+{{!--              <div class="large-2 columns">--}}
+{{!--                {{purple.delete-distribution-result ID = oneResult.id}}--}}
+{{!--              </div>--}}
+{{!--            </div>--}}
+{{!--          {{/if}}--}}
+{{!--      {{/each}}--}}
+{{!--    </ul>--}}
+{{!--</ul>--}}
+{{purple.display-distribution-result model = model}}
+{{purple.add-distribution-result model = model}}

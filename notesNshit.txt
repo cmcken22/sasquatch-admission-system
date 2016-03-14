@@ -1,0 +1,11 @@
+TO RUN THE MONGO SEVRVER
+mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"
+
+if an unclean shut down has been detected:
+delete the file named "mongod.lock" in te data folder
+re-run the following code
+mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"
+
+TO RUN THE EMBER SERVER
+ember server --proxy https://ember-testing-rfreethy.c9users.io:8082
+

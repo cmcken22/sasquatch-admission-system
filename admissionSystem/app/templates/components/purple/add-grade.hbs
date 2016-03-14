@@ -1,0 +1,47 @@
+<form id="add-student-form">
+    <h2>Add new Grade</h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <label>Select course
+              <select onchange={{action "setCourse" value="target.value"}}>
+                <option value=100>Select Course</option>
+                {{#each model.courseCode as |oneCourse|}}
+                    <option value={{oneCourse.id}}>{{oneCourse.code}}, {{oneCourse.name}}</option>
+                {{/each}}
+             </select>
+            </label>
+            
+            <label>Select Student
+              <select onchange={{action "setStudent" value="target.value"}}>
+                <option value=100>Select a Student</option>
+                {{#each studentModel as |oneStudent|}}
+                    <option value={{oneStudent.id}}>{{oneStudent.firstName}}, {{oneStudent.lastName}}{{oneStudent.studentNum}}</option>
+                {{/each}}
+             </select>
+            </label>
+            
+            <label>Select Program Record
+              <select onchange={{action "setRecord" value="target.value"}}>
+                <option value=100>Select Program Record</option>
+                {{#each model.programRecord as |oneRecord|}}
+                    <option value={{oneRecord.id}}> {{oneRecord.degree.name}}, {{oneRecord.term.name}}</option>
+                {{/each}}
+             </select>
+            </label>
+            
+            <label>Mark
+                {{input value=newMark id="newMark" type="text"}} 
+            </label>
+            
+            <label>Section
+               {{input value=newSection id="newSection" type="text"}} 
+            </label>
+            
+        </div>
+    </div>
+</form>
+<br>
+<a href="#" class="button radius" {{action 'addGrade' newMark newSection}}>Save</a>
+
+{{!--<a href="#" class="button radius" {{action 'addGender'}}>Testing Add Gender</a>--}}
+<a href="#" class="button radius" >Cancel</a>
