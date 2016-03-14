@@ -23,6 +23,9 @@ exports.getID = function (request, response) {//gets json for specified student(
             response.json({student: student});
         }
     });
+    
+
+    
 };
 
 exports.post =  function (request, response) {

@@ -33,6 +33,7 @@ app.post('/authenticate', function (request, response) {
 var student = require('./routes/students');
 app.get('/students', student.get);
 app.get('/students/:student_id', student.getID);
+
 app.post('/students', student.post);
 app.put('/students/:student_id', student.put);
 app.delete('/students/:student_id', student.delete);
@@ -200,6 +201,7 @@ app.delete('/commentCodes/:commentCode_id', comment.delete);
 var grade = require('./routes/grades');
 app.get('/grades', grade.get);
 app.get('/grades/:grade_id', grade.getID);
+app.get('/students/:student_id', grade.getMyGrades);
 app.post('/grades', grade.post);
 app.delete('/grades/:grade_id', grade.delete);
 
@@ -234,6 +236,13 @@ app.get('/admissionRules', admissionRule.get);
 app.get('/admissionRules/:admissionRule_id', admissionRule.getID);
 app.post('/admissionRules', admissionRule.post);
 app.delete('/admissionRules/:admissionRule_id', admissionRule.delete);
+
+//==============================LOGIN ROUTE===================================//
+
+var logins = require('./routes/logins');
+var roots = require('./routes/roots');
+app.use('/logins', logins);
+app.use('/roots', roots);
 
 //<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>><<>><<>><<>><<>//
 

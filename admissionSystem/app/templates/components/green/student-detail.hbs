@@ -2,8 +2,8 @@
 <a href="#" class="button radius" {{action 'viewGrades'}}>View Grades</a>
 
 {{#if viewGrades}}
-    {{#each selectedStudent.marks as |oneGrade|}}
-        <h5>{{oneGrade.course.name}} - {{oneGrade.mark}}</h5>
+    {{#each gradesModel as |oneGrade|}}
+        <p>{{oneGrade.course.name}} - {{oneGrade.mark}}</p>
     {{/each}}
 {{/if}}
 

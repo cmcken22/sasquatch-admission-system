@@ -36,7 +36,26 @@ export default Ember.Component.extend({
     this.set('selectedStudent.studentNum', sNum2);
     // this.set('studentNum', sNum);
   },
+  
+  // studentModel: Ember.computed(function(){
+  //     return this.get('store').findAll('student');
+  // }),
 
+  gradesModel: Ember.computed(function(){
+    var myStore = this.get('store');
+    
+    let thisStudent = myStore.peekRecord('student', this.get('selectedStudent.id'));
+    // .then((marks) => {
+    
+    myStore.findAll('grade').then(() => {
+      return thisStudent.get('marks');
+    })
+    
+    //setTimeout(function(){
+    //   return myStore.findAll('grade').filterBy('student', thisStudent);
+    // },200)
+  }),
+  
   actions: {
     
     selectDay(day) {
@@ -110,7 +129,6 @@ export default Ember.Component.extend({
     
     viewGrades: function(){
       this.set('viewGrades', true);
-      var myStore = this.get('store');
     }
     
   }
