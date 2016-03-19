@@ -3,25 +3,26 @@
 <ul class="circle">
     <ul>
       {{#each studentModel as |oneStudent|}}
-        
-        {{#if oneStudent.marks.length}}
-          <h4>{{oneStudent.firstName}} - {{oneStudent.lastName}}</h4>
-        {{/if}}
-      
-        {{#each oneStudent.marks as |oneGrade|}}
+        <div class="row model-item">
           <div class="large-12 columns">
-            <div class="large-10 columns">
-               
-                
-                {{oneGrade.course.name}} - {{oneGrade.mark}}
-              
+            <div class='row'>
+              <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
             </div>
-            <div class="large-2 columns">
-              {{purple.delete-grade ID = oneGrade.id}}
-            </div>
-            
+            {{#if (eq oneStudent.id currentID)}}
+              {{#each oneStudent.marks as |oneGrade|}}
+                <div class="large-12 columns">
+                  <div class="large-10 columns">
+                    {{oneGrade.course.name}} - {{oneGrade.mark}}
+                  </div>
+                <div class="large-2 columns">
+                  {{purple.delete-grade ID = oneGrade.id}}
+                </div>
+                  
+              </div>
+              {{/each}}
+            {{/if}}
           </div>
-          {{/each}}
+        </div>
       {{/each}}
     </ul>
 </ul>

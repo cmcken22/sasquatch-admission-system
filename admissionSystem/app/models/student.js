@@ -9,6 +9,6 @@ export default DS.Model.extend({
     gender: DS.belongsTo('gender',{ async: true }),
     residency: DS.belongsTo('residency',{ async: true }),
     load: DS.belongsTo('load',{ async: true }),
-    level: DS.belongsTo('program-record',{async:true}),
-    marks: DS.hasMany('grade',{ async: true })
+    level: DS.belongsTo('program-record', {async:true}),
+    marks: DS.hasMany('grade', { async: true })
 });

@@ -68,7 +68,8 @@ Router.map(function() {
   });
   this.route('codes');
   this.route('students');
-  
+
+  this.route('adminPortal');
 });
 
 export default Router;

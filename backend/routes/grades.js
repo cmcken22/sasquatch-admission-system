@@ -24,20 +24,6 @@ exports.getID = function (request, response) {//gets json for specified student(
         }
     });
 };
-exports.getMyGrades = function (request, response) {//gets json for specified student(by ID)
-    console.log('app.get(/MYgrades)');
-    // console.log('request.params.studentNum: ' + request.params.student_id);
-    
-    
-    // gradeModel.find({"student": request.params.student_id}), function (error, grades) {
-    //     if (error) {
-    //         response.send({error: error});
-    //     }
-    //     else {
-    //         response.json({student: grades});
-    //     }
-    // };
-};
 
 
 exports.post = function (request, response) {

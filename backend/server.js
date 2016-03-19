@@ -33,33 +33,10 @@ app.post('/authenticate', function (request, response) {
 var student = require('./routes/students');
 app.get('/students', student.get);
 app.get('/students/:student_id', student.getID);
-
 app.post('/students', student.post);
 app.put('/students/:student_id', student.put);
 app.delete('/students/:student_id', student.delete);
 
-//===============================LOGIN ROUTE==================================//
-
-var studentModel = require('./models/student');
-app.post('/login', function (request, response) {
-    
-    var check = new studentModel({
-        firstName: request.body.student.firstName,
-        studentNum: request.body.student.studentNum
-    });
-    
-    console.log(check.firstName + "    " + check.studentNum);
-    
-    // login.save(function (error) {
-    //     console.log('saving to database: ' + student.firstName + " " + student.lastName + " " + student.studentNum + " " + student.DOB);
-    //     if (error) {
-    //         response.send({error: error});
-    //     }
-    //     else {
-    //         response.status(201).json({student: student});
-    //     }
-    // });
-});
 
 //=============================COUNTRIES ROUTE================================//
 
@@ -201,7 +178,6 @@ app.delete('/commentCodes/:commentCode_id', comment.delete);
 var grade = require('./routes/grades');
 app.get('/grades', grade.get);
 app.get('/grades/:grade_id', grade.getID);
-app.get('/students/:student_id', grade.getMyGrades);
 app.post('/grades', grade.post);
 app.delete('/grades/:grade_id', grade.delete);
 
@@ -237,13 +213,26 @@ app.get('/admissionRules/:admissionRule_id', admissionRule.getID);
 app.post('/admissionRules', admissionRule.post);
 app.delete('/admissionRules/:admissionRule_id', admissionRule.delete);
 
+
 //==============================LOGIN ROUTE===================================//
 
-var logins = require('./routes/logins');
-var roots = require('./routes/roots');
-app.use('/logins', logins);
+var roots           = require('./routes/roots');
+var users           = require('./routes/users');
+var passwords       = require('./routes/passwords');
+var roleCodes       = require('./routes/roleCodes');
+var userRoles       = require('./routes/usersRoles');
+var rolePermissions = require('./routes/rolePermissions');
+var logins          = require('./routes/logins');
+
 app.use('/roots', roots);
+app.use('/users', users);
+app.use('/passwords', passwords);
+app.use('/roleCodes', roleCodes);
+app.use('/userRoles', userRoles);
+app.use('/rolePermissions', rolePermissions);
+app.use('/logins', logins);
 
 //<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>><<>><<>><<>><<>//
 
+console.log("Magic happens on port 8082");
 app.listen('8082');

@@ -8,7 +8,9 @@ module.exports = function(environment) {
     locationType: 'auto',
     
     contentSecurityPolicy: {
-      'connect-src' : "'self' https://sasquatch-admission-system-cmcken22.c9users.io:8082"
+      'connect-src' : "'self' https://sasquatch-admission-system-cmcken22.c9users.io:8082",
+      'img-src': "'self' *",
+      'style-src': "'self' 'unsafe-inline'",
     },
     EmberENV: {
       FEATURES: {

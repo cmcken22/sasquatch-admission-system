@@ -14,7 +14,7 @@
             <label>Select Student
               <select onchange={{action "setStudent" value="target.value"}}>
                 <option value=100>Select a Student</option>
-                {{#each studentModel as |oneStudent|}}
+                {{#each model.student as |oneStudent|}}
                     <option value={{oneStudent.id}}>{{oneStudent.firstName}}, {{oneStudent.lastName}}{{oneStudent.studentNum}}</option>
                 {{/each}}
              </select>

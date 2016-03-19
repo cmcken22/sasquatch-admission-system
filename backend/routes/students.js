@@ -1,4 +1,5 @@
 var studentModel = require('../models/student');
+var gradeModel = require('../models/grade');
 
 exports.get = function (request, response) {//gets json for all students
     console.log('app.get(/students)');
@@ -14,17 +15,28 @@ exports.get = function (request, response) {//gets json for all students
 
 exports.getID = function (request, response) {//gets json for specified student(by ID)
     console.log('app.get(/students/:student_id)');
+    
     // console.log('request.params.studentNum: ' + request.params.student_id);
+    var json = {};
     studentModel.findById(request.params.student_id, function (error, student) {
         if (error) {
             response.send({error: error});
         }
         else {
-            response.json({student: student});
-        }
+            json.student = student;
+            gradeModel.find({"student": request.params.student_id}, function (error, marks) {
+                
+                if(marks.length >= 1){
+                    json.student.marks = marks;
+                    response.json(json);
+                }else{
+                    response.json(json);
+                }
+            });
+        };
     });
     
-
+    
     
 };
 
@@ -97,7 +109,7 @@ exports.put = function (request, response) {
             student.country = request.body.student.country;
             student.province = request.body.student.province;
             student.city = request.body.student.city;
-            student.mark = request.body.student.mark;
+            student.marks = request.body.student.marks;
             //ITRList: [];
         
             

@@ -3,8 +3,8 @@
         <select onchange={{action "setProgram" value="target.value"}}>
             <option value=100>Select Program</option>
                     
-            {{#each model.program as |oneProgram|}}
-                <option value={{oneProgram.id}}>{{oneProgram.programName}}</option>
+            {{#each model.academicprogramcode as |oneProgram|}}
+                <option value={{oneProgram.id}}>{{oneProgram.name}}</option>
             {{/each}}
         </select>
         <br>

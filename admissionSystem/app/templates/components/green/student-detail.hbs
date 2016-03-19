@@ -1,11 +1,6 @@
 <h2>{{selectedStudent.firstName}} {{selectedStudent.lastName}}</h2>
-<a href="#" class="button radius" {{action 'viewGrades'}}>View Grades</a>
 
-{{#if viewGrades}}
-    {{#each gradesModel as |oneGrade|}}
-        <p>{{oneGrade.course.name}} - {{oneGrade.mark}}</p>
-    {{/each}}
-{{/if}}
+
 
 {{#if isEditing}}
     <form>
@@ -86,17 +81,33 @@
 {{else}}
     <ul class="square">
         <ul>
-            <li>{{selectedStudent.firstName}} {{selectedStudent.lastName}}</li>
-            <li>{{selectedStudent.studentNum}}</li>
-            <li>{{selectedStudent.DOB}}</li>
-            <li>{{selectedStudent.gender.sex}}</li>
-            <li>{{selectedStudent.residency.residency}}</li>
-            <li>{{selectedStudent.load.load}}</li>
-            <li>{{selectedStudent.city.name}}, {{selectedStudent.city.province.name}}, {{selectedStudent.city.province.country.name}}</li>
+            <p>{{selectedStudent.firstName}} {{selectedStudent.lastName}}</p>
+            <p>{{selectedStudent.studentNum}}</p>
+            <p>{{selectedStudent.DOB}}</p>
+            <p>{{selectedStudent.gender.sex}}</p>
+            <p>{{selectedStudent.residency.residency}}</p>
+            <p>{{selectedStudent.load.load}}</p>
+            <p>{{selectedStudent.city.name}} {{selectedStudent.city.province.name}} {{selectedStudent.city.province.country.name}}</p>
         </ul>
     </ul>
-    <br>
+    
     <a href="#" class="button radius" {{action 'edit' selectedStudent.DOB}}>Edit</a>
-    <a href="#" class="button radius" {{action 'cancel'}}>Cancel</a>
-    {{!--<a href="#" class="button radius" {{action 'update'}}>update</a>--}}
+    <a href="#" class="button radius" {{action 'cancel'}}>Back</a>
+    {{#if (eq viewGrades false)}}<a href="#" class="button radius" {{action 'viewGrades'}}>View Grades</a>{{/if}}
+    <br>
+    {{#if viewGrades}}
+        {{#if selectedStudent.marks.length}}
+            <h4>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Grades</h4>
+            {{#each selectedStudent.marks as |oneGrade|}}
+                <p>{{oneGrade.course.name}} - {{oneGrade.mark}}</p>
+            {{/each}}
+            <a href="#" class="button radius" {{action 'viewGrades'}}>Hide Grades</a>
+        {{/if}}
+    {{/if}}
+    {{!--<a href="#" class="button radius" {{action 'addingGrade'}}>Add Grade</a>--}}
+    {{!--{{#if isAddingGrade}}--}}
+    {{!--    {{purple.add-grade}}--}}
+    {{!--{{/if}}--}}
+    
+    
 {{/if}}

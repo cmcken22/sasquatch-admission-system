@@ -10,10 +10,6 @@ export default Ember.Component.extend({
    // mark: '',
     //section: '100',
     
-    studentModel: Ember.computed(function(){
-      return this.get('store').findAll('student');
-    }),
-    
     
     actions:{
         
@@ -48,9 +44,7 @@ export default Ember.Component.extend({
 
             
             thisStudent.get('marks').then((marks) => {
-                confirm(marks);
                 marks.pushObject(newGrade);
-                confirm(marks);
                 thisStudent.save();
             });
             newGrade.save();
