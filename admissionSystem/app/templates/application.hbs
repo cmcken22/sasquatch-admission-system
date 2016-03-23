@@ -1,6 +1,3 @@
-{{!--{{#liquid-if oudaAuth.isAuthenticated class="letusstart"}}--}}
-{{!--hello--}}
-{{!--{{/liquid-if}}--}}
 {{#if oudaAuth.isAuthenticated}}
 <div id="application-content">        
         <nav class="top-bar" data-topbar data-options="is_hover: true" role="navigation">
@@ -21,6 +18,7 @@
               <li>{{#link-to 'purple.programs'}}Codes{{/link-to}}</li>
               <li>{{#link-to 'purple.itrs'}}ITR{{/link-to}}</li>
               <li>{{#link-to 'adminPortal'}}Admin Portal{{/link-to}}</li>
+              <li>{{#link-to 'distribute'}}Distribution{{/link-to}}</li>
               
               <li class="has-dropdown not-click"><a>Codes</a>
                 <ul class="dropdown">

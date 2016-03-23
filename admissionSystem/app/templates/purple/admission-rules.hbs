@@ -1,18 +1,79 @@
+{{!--<h2>Admission Rules</h2>--}}
+{{!--<ul class="circle">--}}
+{{!--    <ul>--}}
+{{!--      {{#each model.rule as |one|}}--}}
+{{!--      <div class="large-12 columns">--}}
+{{!--          <div class="large-8 columns">--}}
+{{!--              <li>--}}
+{{!--                {{one.description}}--}}
+{{!--              </li>--}}
+{{!--          </div>--}}
+{{!--          <div class="large-4 columns">--}}
+{{!--            {{purple.delete-admission-rule ID = one.id}}--}}
+{{!--          </div>--}}
+{{!--          </div>--}}
+{{!--      {{/each}}--}}
+{{!--    </ul>--}}
+{{!--</ul>--}}
+{{!--{{purple.add-admission-rule model = model}}--}}
+
+
 <h2>Admission Rules</h2>
-<ul class="circle">
-    <ul>
-      {{#each model.rule as |one|}}
-      <div class="large-12 columns">
-          <div class="large-8 columns">
-              <li>
-                {{one.description}}
-              </li>
-          </div>
-          <div class="large-4 columns">
-            {{purple.delete-admission-rule ID = one.id}}
-          </div>
+<div class="circle">
+      {{#each model.academicprogramcode as |oneProgram|}}
+          <div class="row model-item">
+            <div class="large-12 columns">
+            
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneProgram.id}}>{{oneProgram.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneProgram.id}}>Manage Rules</a>
+              </div>
+              {{#if (eq oneProgram.id currentID)}}
+                  
+                  Here are the Rules for {{oneProgram.name}}
+                  
+                  {{#each oneProgram.rules as |oneRule|}}
+                  
+                  
+                    
+                    <br>{{oneRule.description}}
+            
+                      <a href="#" class="button tiny" {{action 'removeRule' oneRule.id}}>Remove Rule</a>
+                      
+            
+                  {{/each}}
+                  
+                  <br><br>
+                  {{#if (eq addNewRule false)}}
+                    <a href="#" class="button tiny newRule-button" {{action 'addNewRule'}}>Add Rules</a>
+                  {{/if}}
+                  
+                  {{#if addNewRule}}
+                  
+                    <br>New Rule for {{oneProgram.name}}
+                    <br>
+                    
+                  <select onchange={{action "saveRule" value="target.value"}}>
+                    <option value=100>Select Rule</option>
+            
+                    {{#each model.rule as |oneRule|}}
+                      <option value={{oneRule.id}}>{{oneRule.description}} </option>
+                    {{/each}}
+                  </select>
+                  
+                  
+                    <a href="#" class="button tiny newRule-button" {{action 'addNewRule'}}>Cancel</a>
+                    
+                  {{/if}}
+                  
+                  
+                  
+              
+              {{/if}}
+              
+              
+            </div>
           </div>
       {{/each}}
-    </ul>
-</ul>
+    
+</div>
 {{purple.add-admission-rule model = model}}

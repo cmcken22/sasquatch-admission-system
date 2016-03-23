@@ -26,13 +26,6 @@
         </select>
         <br>
             
-        <select onchange={{action "setStudent" value="target.value"}}>
-            <option value=100>Select Student</option>
-                    
-            {{#each model.student as |oneStudent|}}
-                <option value={{oneStudent.id}}>{{oneStudent.firstName}}  {{oneStudent.lastName}}</option>
-            {{/each}}
-         </select>
     </form>
     <br>
     <a href="#" class="button radius" {{action 'addItr' programName}}>Save</a>

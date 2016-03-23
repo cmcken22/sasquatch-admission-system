@@ -177,6 +177,13 @@ ul.system-admin-buttons li a{
     /*background:none repeat scroll 0 0 #f4f4f4 !important;*/
     /*border:1px solid #ddd !important;*/
 }
+div.circle{
+    margin-left:1.1em !important;
+}
 
+
+.model-item .button.tiny.newRule-button{
+    float:left !important;
+}
 /*end of Ouda's admin portal*/
 

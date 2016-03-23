@@ -8,4 +8,5 @@ export default Ember.Controller.extend({
     studentModel: Ember.computed(function(){
       return this.get('store').findAll('student');
     }),
+    
 });

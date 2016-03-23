@@ -3,23 +3,28 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     store: Ember.inject.service(),
     routing: Ember.inject.service('-routing'),
-    logicalExpression: '100',
+    course: '100',
     
     actions:{
         
-        setExp(logicalExpressionID){
-            this.set('logicalExpression', logicalExpressionID);
+        setCourse(courseID){
+            this.set('course', courseID);
         },
         
         addAdmissionRule: function(){
             var myStore = this.get('store');
-            var newLogicalExp = myStore.peekRecord('logical-expression', this.get('logicalExpression'));
+            var newCourse = myStore.peekRecord('course-code', this.get('course'));
+            var newMark =  this.get('minNumber');
+            
             var newRule = myStore.createRecord('admission-rule', {
               description: this.get('description'),
-              testExpression: newLogicalExp,
+              course: newCourse,
+              minMark: newMark,
             });
             newRule.save();
             // this.get('routing').transitionTo('gender');
         },
+        
+
     }
 });

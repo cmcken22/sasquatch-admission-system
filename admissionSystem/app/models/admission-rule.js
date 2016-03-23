@@ -1,6 +1,12 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+    
     description: DS.attr(),
-    testExpression: DS.belongsTo('logical-expression',{ async: true })
+    
+    course: DS.belongsTo('course-code', {async:true}),
+    
+    minMark: DS.attr('number'),
+    
+    //testExpression: DS.hasMany('logical-expression',{ async: true })
 });

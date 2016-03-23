@@ -24,14 +24,45 @@ exports.getID = function (request, response) {//gets json for specified student(
     });
 };
 
+
+
+exports.put = function (request, response) {
+    console.log('app.put(/programs/:program_id)');
+    // use our Posts model to find the post we want
+    admissionRuleModel.findById(request.params.admissionRule_id, function (error, admissionRule) {
+        if (error) {
+            response.send({error: error});
+        }
+        else {
+            admissionRule.description = request.body.admissionRule.description;
+            admissionRule.course = request.body.admissionRule.course;
+            admissionRule.minMark = request.body.admissionRule.minMark;
+
+            admissionRule.save(function (error) {
+                console.log('saving to database: ' + admissionRule.description);
+                if (error) {
+                    response.send({error: error});
+                }
+                else {
+                    response.status(201).json({admissionRule: admissionRule});
+                }
+            });
+        }
+    });
+}
+
+
+
+
 exports.post = function (request, response) {
     console.log('app.post(/admissionRules)');
     var admissionRule = new admissionRuleModel({
         description: request.body.admissionRule.description,
-        testExpression: request.body.admissionRule.testExpression
+        course: request.body.admissionRule.course,
+        minMark: request.body.admissionRule.minMark
     });
     admissionRule.save(function (error) {
-        console.log('saving to database: ' + admissionRule.name);
+        console.log('saving to database: ' + admissionRule.description);
         if (error) {
             response.send({error: error});
         }

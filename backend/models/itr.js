@@ -4,7 +4,7 @@ var Schema       = mongoose.Schema;
 var itrSchema = mongoose.Schema({
     order: Number,
     eligibility: String,
-    program: {type: mongoose.Schema.ObjectId, ref: ('programModel')},
+    academicprogramcode: {type: mongoose.Schema.ObjectId, ref: ('programModel')},
     student: {type: mongoose.Schema.ObjectId, ref: ('studentModel')}
 }, {
     versionKey: false // to disable the "__v" attribute

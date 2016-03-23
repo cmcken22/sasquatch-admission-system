@@ -1,0 +1,88 @@
+
+<br>
+{{#each thisStudent.itrs as |oneItr|}}
+        <div class="row">
+            
+            <div class="large-10 columns">
+                
+                Choice {{oneItr.order}} - {{oneItr.academicprogramcode.name}}
+                <br>
+                Eligibility: 
+                {{#if (eq oneItr.eligibility '1')}}
+                    Yes 
+                {{else}}
+                    No
+                {{/if}}
+            
+            </div>
+            
+            {{#if (eq currentITRedit oneItr.id)}}
+                <a href="#" class="button tiny" {{action 'deleteITR' oneItr}}>Delete</a>
+            {{/if}}
+               
+            <div class="large-2 columns">
+                {{#if (not-eq currentITRedit oneItr.id)}}
+                <a href="#" class="button tiny" {{action 'setEdit' oneItr.id}}>Edit</a>
+                {{/if}}
+            </div>
+        </div>
+        <br>
+{{/each}}
+
+{{#if (eq thisStudent.itrs.length 0)}}
+    <p>{{thisStudent.firstName}} {{thisStudent.lastName}} does not have a completed intent to register.</p>
+
+{{/if}}
+
+
+{{#if (eq isAdding false)}}
+<a href="#" class="button radius" {{action 'addToggle'}}>Add ITR</a>
+{{/if}}
+
+
+{{#if (eq isAdding true)}}
+Add program choice
+
+    <form id="add-student-form">
+    
+        <select onchange={{action "setProgram" value="target.value"}}>
+            <option value=100>Select Program</option>
+                    
+            {{#each model.academicprogramcode as |oneProgram|}}
+                <option value={{oneProgram.id}}>{{oneProgram.name}}</option>
+            {{/each}}
+        </select>
+        
+        
+        
+        <br>
+        
+        
+        <select onchange={{action "setOrder" value="target.value"}}>
+            <option value=100>Select Order Preference</option>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+        </select>
+    
+        <br>
+        
+        
+        
+        <select onchange={{action "setElligibility" value="target.value"}}>
+            <option value=100>Select Elligibility</option>
+            <option value = 1>Elligible</option>
+            <option value = 0>Not Elligible</option>
+            
+        </select>
+        
+        
+        <br>
+            
+    </form>
+    <a href="#" class="button radius" {{action 'addItr' programName}}>Save</a>
+    <a href="#" class="button radius" {{action 'cancelAdd'}}>Cancel</a>
+
+{{/if}}

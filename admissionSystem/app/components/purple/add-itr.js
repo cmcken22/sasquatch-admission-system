@@ -31,7 +31,7 @@ export default Ember.Component.extend({
             var newitr = myStore.createRecord('itr', {
                 eligibility: this.get('eligibility'),
                 order: this.get('order'),
-                program: newProgramID,
+                academicprogramcode: newProgramID,
                 student: newStudentID
             });
             newitr.save();

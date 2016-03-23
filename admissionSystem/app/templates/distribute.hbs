@@ -1,0 +1,43 @@
+<h1>Distribution</h1>
+
+<a href="#" class="button tiny" {{action 'distributeAll'}}>Distribute ALL</a>
+
+<ul class="circle">
+<ul>
+  {{#each model.student as |oneStudent|}}
+    <div class="row model-item">
+      <div class="large-12 columns">
+        
+        <div class='row'>
+          <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
+        </div>
+        
+        <a href="#" class="button tiny" {{action 'distribute' oneStudent.id}}>Distribute</a>
+        
+        {{#if (eq oneStudent.id currentID)}}
+          {{#each oneStudent.marks as |oneGrade|}}
+            <div class="large-12 columns">
+              <div class="large-10 columns">
+                {{oneGrade.course.name}} - {{oneGrade.course.code}} {{oneGrade.course.number}} - {{oneGrade.mark}}
+              </div>
+            <div class="large-2 columns">
+              {{purple.delete-grade ID = oneGrade.id}}
+            </div>
+          </div>
+          {{/each}}
+          
+        <p>------------------------------------------------------------------------</p>
+          {{#each oneStudent.itrs as |itr|}}
+            <div class="large-12 columns">
+                <p>{{itr.academicprogramcode.name}}</p>
+                <p>Order: {{itr.order}}</p>
+                <p>Eligibility: {{itr.eligibility}}</p>
+            </div>
+          {{/each}}
+          
+        {{/if}}
+      </div>
+    </div>
+  {{/each}}
+</ul>
+</ul>

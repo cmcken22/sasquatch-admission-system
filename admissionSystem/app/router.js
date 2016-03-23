@@ -63,13 +63,16 @@ Router.map(function() {
     this.route('program-record',{path:'program-records/:program-record_id'});
     this.route('logical-expression');
     this.route('logical-expressions');
-    this.route('admission-rule');
-    this.route('admission-rules');
+    
   });
   this.route('codes');
   this.route('students');
-
+  this.route('purple', {path: '/rules'} , function() {
+    this.route('admission-rule');
+    this.route('admission-rules');
+  });
   this.route('adminPortal');
+  this.route('distribute');
 });
 
 export default Router;

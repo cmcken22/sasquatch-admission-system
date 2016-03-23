@@ -210,6 +210,7 @@ app.delete('/logicalExpressions/:logicalExpression_id', logicalExpression.delete
 var admissionRule = require('./routes/admission-rules');
 app.get('/admissionRules', admissionRule.get);
 app.get('/admissionRules/:admissionRule_id', admissionRule.getID);
+app.put('/admissionRules/:admissionRule_id', admissionRule.put);
 app.post('/admissionRules', admissionRule.post);
 app.delete('/admissionRules/:admissionRule_id', admissionRule.delete);
 

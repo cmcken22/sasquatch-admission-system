@@ -27,7 +27,7 @@ exports.getID = function (request, response) {//gets json for specified student(
 
 exports.post = function (request, response) {
     var itr = new itrModel({
-        program: request.body.itr.program,
+        academicprogramcode: request.body.itr.academicprogramcode,
         student: request.body.itr.student,
         order: request.body.itr.order,
         eligibility: request.body.itr.eligibility
