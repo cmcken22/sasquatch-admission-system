@@ -3,8 +3,6 @@
     <ul>
       {{#each model.department as |oneDepartment|}}
           
-          
-          
           <div class="row model-item">
             <div class="large-12 columns">
             
@@ -35,7 +33,6 @@
               </label>
               
               <br>
-              
               
               <a href="#" class="button tiny" {{action 'updateDepartment' oneDepartment.id oneDepartment.name}}>Save</a>
               <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>

@@ -12,7 +12,7 @@ export default Ember.Component.extend
       {
         // Put in the functionality for uploading faculties in here
         var myStore = this.get('store');
-        var faculties = myStore.peekAll('faculty');
+        var departments = myStore.peekAll('department');
         
         var toLoad = file.files[0];
         
@@ -34,9 +34,9 @@ export default Ember.Component.extend
         	complete: function(results) 
         	{
         		var first = true;
-        		var facultyMatch = false;
+        		var departmentMatch = false;
         		
-        		results.data.forEach(function(faculty) 
+        		results.data.forEach(function(department) 
         		{
         		    
         		  // The loop for processing student data
@@ -45,32 +45,32 @@ export default Ember.Component.extend
         		    first = false;
         		  }else
         		  {
-        		    var facultyName = faculty[0];
+        		    var departmentName = department[0];
         		    
         		    //Check to see if the faculty name matches any in the database
-                faculties.forEach(function(localFaculty) 
+                departments.forEach(function(localFaculty) 
                 {
-                  if(facultyMatch === false)
+                  if(departmentMatch === false)
                   {
-                    var facultyString = localFaculty.get('name').toString();
-                    if(facultyString.toUpperCase() == facultyName.toUpperCase())
+                    var departmentString = localFaculty.get('name').toString();
+                    if(departmentString.toUpperCase() == departmentName.toUpperCase())
                     {
-                      alert(facultyName + " from the file is the same as " + facultyString + " from our database");
-                      facultyMatch = true;
+                      alert(departmentName + " from the file is the same as " + departmentString + " from our database");
+                      departmentMatch = true;
                     }
                   }
                 });
                 
                 // If the gender does not exist, we add it to the database
-                if(facultyMatch === false)
+                if(departmentMatch === false)
                 {
                   var newFaculty = myStore.createRecord('faculty', {
-                    name: facultyName
+                    name: departmentName
                   });
                   newFaculty.save();
                 }
                 
-                facultyMatch = false;
+                departmentMatch = false;
 
         		  }
         		  
@@ -82,3 +82,4 @@ export default Ember.Component.extend
       
   }
 });
+

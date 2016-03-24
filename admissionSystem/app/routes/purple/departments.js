@@ -72,6 +72,6 @@ export default Ember.Route.extend({
         });
         
         this.controller.set('currentID', '0');
-      },
+      }
     }
 });

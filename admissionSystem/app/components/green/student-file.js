@@ -8,6 +8,28 @@ export default Ember.Component.extend
 
   actions: 
   {
+      handleFile: function(e)
+       {
+        
+        var files = e.files[0];
+        //var i,f;
+        //for (i = 0, f = files[i]; i != files.length; ++i) {
+        var reader = new FileReader();
+        var name = files.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+            /*global XLSX*/
+            var workbook = XLSX.read(data, {type: 'binary'});
+            var csv = workbook.utils.sheet_to_csv;
+            this.send('uploadFile', csv);
+          /* DO SOMETHING WITH workbook HERE */
+      };
+          reader.readAsBinaryString(files);
+        //}
+      
+              
+         
+       }, 
       uploadFile: function(file)
       {
         var myStore = this.get('store');
@@ -15,6 +37,7 @@ export default Ember.Component.extend
         var residencies = myStore.peekAll('residency');
         
         var toLoad = file.files[0];
+        //if (file.)
         
         if(toLoad)
         {
@@ -27,7 +50,7 @@ export default Ember.Component.extend
         
         
         
-        /* global Papa */
+        /*global Papa*/
         
         Papa.parse
         (toLoad, {

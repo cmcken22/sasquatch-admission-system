@@ -24,6 +24,8 @@ export default Ember.Route.extend({
         }
       },
       
+      
+      
       cancel: function(){
         this.controller.set('edit', false);  
         this.controller.set('currentID', '0');
