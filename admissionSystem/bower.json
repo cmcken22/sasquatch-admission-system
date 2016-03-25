@@ -12,6 +12,10 @@
     "jquery": "1.11.3",
     "loader.js": "ember-cli/loader.js#3.4.0",
     "qunit": "~1.20.0",
-    "foundation": "^5.5.3"
+    "foundation": "^5.5.3",
+    "js-xlsx": "^0.8.0"
+  },
+  "resolutions": {
+    "jquery": "1.11.3"
   }
 }

@@ -93,6 +93,7 @@
     
     <a href="#" class="button radius" {{action 'edit' selectedStudent.DOB}}>Edit</a>
     <a href="#" class="button radius" {{action 'cancel'}}>Back</a>
+    <br>
     {{#if (eq viewGrades false)}}<a href="#" class="button radius" {{action 'viewGrades'}}>View Grades</a>{{/if}}
     <br>
     {{#if viewGrades}}
@@ -103,6 +104,23 @@
             {{/each}}
             <a href="#" class="button radius" {{action 'viewGrades'}}>Hide Grades</a>
         {{/if}}
+    {{/if}}
+    {{#if (eq viewITR false)}}<a href="#" class="button radius" {{action 'viewITR'}}>View ITRS</a>{{/if}}
+    {{#if viewITR}}
+        {{!--{{#if selectedStudent.itrs.length}}--}}
+        {{!--    <h4>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s ITR's</h4>--}}
+        {{!--    {{#each selectedStudent.itrs as |oneITR|}}--}}
+        {{!--        <p>Choice {{oneITR.order}} - {{oneITR.academicprogramcode.name}}</p>--}}
+        {{!--    {{/each}}--}}
+            
+
+        {{!--    <a href="#" class="button radius" {{action 'viewITR'}}>Hide ITRS</a>--}}
+        {{!--{{else}}--}}
+        {{!--    {{selectedStudent.firstName}} {{selectedStudent.lastName}} does not have any ITRs--}}
+        {{!--    <br>--}}
+        {{!--{{/if}}--}}
+        <br>
+        {{purple.manage-itrs thisStudent = selectedStudent model = model}}
     {{/if}}
     {{!--<a href="#" class="button radius" {{action 'addingGrade'}}>Add Grade</a>--}}
     {{!--{{#if isAddingGrade}}--}}

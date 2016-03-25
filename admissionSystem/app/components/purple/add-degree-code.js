@@ -13,26 +13,49 @@ export default Ember.Component.extend({
             newCode.save();
             // this.get('routing').transitionTo('gender');
         },
-        uploadDegreeCodes: function(file){
-            var myStore = this.get('store');
-            var degreeCodes = myStore.peekAll('degree-code');
+        uploadDegreeCodes: function(e){
             
-            // For this function since degree codes don't rely on anything else, we're good to go
-            // just checking for duplicate entries, skipping if they exist and creating new records
-            // if they don't
+         alert(e.value.split(".").pop());
+         if(e.value.split(".").pop()=="xlsx"){
+          var files = e.files[0];
+          alert(files);
+            var reader = new FileReader();
+            var name = files.name;
+            var self = this;
+            reader.onload = function(e) {
+              var data = e.target.result;
+              
+              var workbook = XLSX.read(data, {type: 'binary'});
+              
+              /* DO SOMETHING WITH workbook HERE */
+              var sheet = workbook.Sheets[workbook.SheetNames[0]];
+              alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
+              var csvFile = XLSX.utils.sheet_to_csv(sheet, {"FS": ","});
+              self.send("papapa", csvFile);
+          };
+          reader.readAsBinaryString(files);
+         }
+         else{
+           
+            var toLoad = e.files[0];
+            //if (file.)
             
-            var toLoad = file.files[0];
-        
             if(toLoad)
             {
-              alert("Here's the size of the file: " + toLoad.size);
+              alert("Loaded " + toLoad.name + " of size " + toLoad.size);
               
             }else
             {
-              alert("File failed to load!");
+              alert("Didn't load");
             }
-            
+            this.send("papapa", toLoad);
+          }
+      },
+          papapa: function(toLoad){ 
             /* global Papa */
+            var myStore = this.get('store');
+            var degreeCodes = myStore.peekAll('degree-code');
+          
             Papa.parse
             (toLoad, {
             	complete: function(results) 
@@ -60,22 +83,21 @@ export default Ember.Component.extend({
                         if(codeString.toUpperCase() == codeName.toUpperCase())
                         {
                           alert(codeName + " from the file is the same as " + codeString + " from our database");
-                          departmentMatch = true;
+                          codeMatch = true;
                         }
                       }
                     });
                     
                     // If the gender does not exist, we add it to the database
-                    if(departmentMatch === false)
+                    if(codeMatch === false && codeName != "")
                     {
-                      var newDepartment = myStore.createRecord('department', {
-                        name: departmentName,
-                        faculty: newFacultyID
+                      var newDegreeCode = myStore.createRecord('degree-code', {
+                        name: codeName
                       });
-                      newDepartment.save();
+                      newDegreeCode.save();
                     }
                     
-                    departmentMatch = false;
+                    codeMatch = false;
     
             		  }
             		  

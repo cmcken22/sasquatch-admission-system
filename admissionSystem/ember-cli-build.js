@@ -12,7 +12,9 @@ module.exports = function(defaults) {
   app.import('bower_components/foundation/css/foundation.css');
   app.import('bower_components/foundation/css/normalize.css');
   app.import('bower_components/papaparse/papaparse.min.js');
-  app.import('bower_components/js-xlsx/dist/xlsx.min.js');
+   app.import('bower_components/jszip/dist/jszip.min.js',{prepend:true});
+  app.import('bower_components/js-xlsx/dist/xlsx.full.min.js');
+ 
   
   
   // Use `app.import` to add additional libraries to the generated

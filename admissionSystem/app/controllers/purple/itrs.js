@@ -21,7 +21,11 @@ export default Ember.Controller.extend({
     
     actions: {    
       setStudent(student){
-        this.set('student', student);
+          if(this.get('student') === student){
+            this.set('student', '100');
+          }else{
+              this.set('student', student);
+          }
       },
       
     deleteItr: function(id){

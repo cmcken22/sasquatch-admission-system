@@ -1,6 +1,5 @@
 <div class="row">
     <div class="large-12 columns">
-    {{!-----------------------SELECT PROVINCE-------------------------}}
     <select onchange={{action "setStudent" value="target.value"}}>
                 <option value=100>Select Student</option>
               {{#each model.student as |oneStudent|}}
@@ -10,24 +9,15 @@
     </div>
 </div><br>
 
-<ul class="circle">
-    <ul>
+<div class="circle">
       {{#each model.distributionResult as |oneResult|}}
         {{#if (eq oneResult.student.id student)}}
-          <div style="padding-bottom:20px;" class="large-12 columns">
-              <div class="large-10 columns">
-                  <li>
-                    {{oneResult.student.firstName}} {{oneResult.student.lastName}}
-                  </li>
-                  <li>
-                    Comment Code: {{oneResult.comment.code}}
-                  </li>
-                  <li>
-                    Description: {{oneResult.comment.description}}
-                  </li>
-                  <li>
-                    Date: {{oneResult.date}}
-                  </li>
+          <div class="row model-item">
+            <div class="large-10 columns">
+                <p>{{oneResult.student.firstName}} {{oneResult.student.lastName}}</p>
+                <p> Comment Code: {{oneResult.comment.code}}</p>
+                <p> Description: {{oneResult.comment.description}}</p>
+                <p> Date: {{oneResult.date}}</p>
               </div>
               <div class="large-2 columns">
                 {{purple.delete-distribution-result ID = oneResult.id}}
@@ -35,5 +25,4 @@
             </div>
           {{/if}}
       {{/each}}
-    </ul>
-</ul>
+</div>

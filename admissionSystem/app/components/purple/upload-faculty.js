@@ -8,26 +8,50 @@ export default Ember.Component.extend
 
   actions: 
   {
-      uploadFile: function(file)
+      uploadFile: function(e)
       {
         // Put in the functionality for uploading faculties in here
-        var myStore = this.get('store');
-        var faculties = myStore.peekAll('faculty');
-        
-        var toLoad = file.files[0];
-        
-        if(toLoad)
-        {
-          //alert("Here we are in faculties doing all sorts of crazy shit, here's a number: " + toLoad.size);
-          
-        }else
-        {
-          alert("File failed to load!");
-        }
-        
-        
+        alert(e.value.split(".").pop());
+         if(e.value.split(".").pop()=="xlsx"){
+          var files = e.files[0];
+          alert(files);
+            var reader = new FileReader();
+            var name = files.name;
+            var self = this;
+            reader.onload = function(e) {
+              var data = e.target.result;
+              
+              var workbook = XLSX.read(data, {type: 'binary'});
+              
+              /* DO SOMETHING WITH workbook HERE */
+              var sheet = workbook.Sheets[workbook.SheetNames[0]];
+              alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
+              var csvFile = XLSX.utils.sheet_to_csv(sheet, {"FS": ","});
+              self.send("papapa", csvFile);
+          };
+          reader.readAsBinaryString(files);
+         }
+         else{
+           
+            var toLoad = e.files[0];
+            //if (file.)
+            
+            if(toLoad)
+            {
+              alert("Loaded " + toLoad.name + " of size " + toLoad.size);
+              
+            }else
+            {
+              alert("Didn't load");
+            }
+            this.send("papapa", toLoad);
+          }
+      },
+          papapa: function(toLoad){  /* global Papa */
         
         /* global Papa */
+        var myStore = this.get('store');
+        var faculties = myStore.peekAll('faculty');
         
         Papa.parse
         (toLoad, {

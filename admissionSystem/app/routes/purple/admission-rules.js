@@ -44,10 +44,6 @@ export default Ember.Route.extend({
           if (confirm ('Are you sure you wish to delete this admission rule?\n' + "This action cannot be undone")) {
             rule.destroyRecord();
           }
-          
         }
-      
-      
-      
     },
 });

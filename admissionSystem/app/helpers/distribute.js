@@ -1,13 +1,16 @@
 import Ember from 'ember';
 
-export function distribute(student, studentAVG) {
+export function distribute(student, studentAVG, myStore) {
     console.log("************************************************************");
     console.log(student.get('firstName') + " " + student.get('lastName') + ": avg = " + studentAVG);
     
-    var eligibility;
-    
     var itrsArray = new Array();
     var gradesArray = new Array();
+    
+    
+    
+    //I HARD-CODED IN THE COMMENT CODE GIVEN WHEN AN ITR RULE IS FAILED
+    var sorryCommentCode = myStore.peekRecord('comment-code', '56f488623f15ea185c000008');
     
     student.get('itrs').forEach(function(itr){
         itrsArray.push(itr);
@@ -84,13 +87,89 @@ export function distribute(student, studentAVG) {
         
         if(passAllRules){
             console.log("------------------------------------------------------------");
-            console.log("Distributed into " + program);
+            console.log("Distributed into: " + program);
             console.log("------------------------------------------------------------");
+            
+            //creating the distribution object here/////////////////////////////
+            var thisStudent = student;
+            
+            var date    = new Date();
+            var day     = date.getDate();
+            var month   = date.getMonth()+1;
+            var year    = date.getFullYear();
+            
+            var commentCode;
+            
+            if(program == 'B.E.Sc. Electrical Engineering'){
+                commentCode = 'EE';
+            }
+            else if(program == 'B.E.Sc. Computer Engineering (Electronic Devices for Ubiquitous Computing)'){
+                commentCode = 'EC';
+            }
+            else if(program == 'B.E.Sc. Integrated Engineering'){
+                commentCode = 'EI';
+            }
+            else if(program == 'B.E.Sc Mechatronic Systems Engineering'){
+                commentCode = 'ED'; 
+            }
+            else if(program == 'B.E.Sc. Software Engineering'){
+                commentCode = 'EF';
+            }
+            else if(program == 'B.E.Sc. Chemical Engineering'){
+                commentCode = 'EB';
+            }
+            else if(program == 'B.E.Sc. Civil Engineering'){
+                commentCode = 'EV';
+            }
+            else if(program == 'B.E.Sc. Mechanical Engineering'){
+                commentCode = 'EM';
+            }
+            else if(program == 'B.E.Sc. Green Process Engineering'){
+                commentCode = 'EG';
+            }
+            
+            
+            // console.log("CommentCode: " + commentCode);
+            
+            myStore.findAll('comment-code').then(function(comments){
+                comments.forEach(function(thisComment){
+                    if(commentCode == thisComment.get('code')){
+                        var newdbResult = myStore.createRecord('distribution-result', {
+                          date: day+"-"+month+"-"+year,
+                          student: thisStudent,
+                          comment: thisComment, 
+                        });
+                        newdbResult.save();
+                    }
+                });
+            });
+            
+            ////////////////////////////////////////////////////////////////////
             break;
         }else{
+            if(itrsArray.length >0){
+                var thisStudent = student;
+                
+                var date    = new Date();
+                var day     = date.getDate();
+                var month   = date.getMonth()+1;
+                var year    = date.getFullYear();
+                
+                 
+                
+                var newdbResult = myStore.createRecord('distribution-result', {
+                  date: day+"-"+month+"-"+year,
+                  student: thisStudent,
+                  comment: sorryCommentCode
+                });
+                newdbResult.save();
+            
+        
+            
             console.log("------------------------------------------------------------");
-            console.log("Student did not pass all rules for " + program);
+            console.log("Student did not pass all rules for: " + program);
             console.log("------------------------------------------------------------");
+            }
         }
     }
     

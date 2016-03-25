@@ -22,6 +22,7 @@ export default Ember.Component.extend({
   
   isEditing: false,
   viewGrades: false,
+  viewITR: false,
   isAddingGrade: false,
 
   currentDay: '',
@@ -120,7 +121,14 @@ export default Ember.Component.extend({
         this.set('viewGrades', false);
       else
         this.set('viewGrades', true);
-    }
+    },
     
+    viewITR: function(){
+      if(this.get('viewITR'))
+        this.set('viewITR', false);
+      else{
+        this.set('viewITR', true);
+      }
+    }
   }
 });

@@ -23,26 +23,52 @@ export default Ember.Component.extend({
             // this.get('routing').transitionTo('gender');
         },
         
-        uploadAdmins: function(file){
-            var myStore = this.get('store');
+        uploadAdmins: function(e){
+            
+           alert(e.value.split(".").pop());
+         if(e.value.split(".").pop()=="xlsx"){
+          var files = e.files[0];
+          alert(files);
+            var reader = new FileReader();
+            var name = files.name;
+            var self = this;
+            reader.onload = function(e) {
+              var data = e.target.result;
+              
+              var workbook = XLSX.read(data, {type: 'binary'});
+              
+              /* DO SOMETHING WITH workbook HERE */
+              var sheet = workbook.Sheets[workbook.SheetNames[0]];
+              alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
+              var csvFile = XLSX.utils.sheet_to_csv(sheet, {"FS": ","});
+              self.send("papapa", csvFile);
+          };
+          reader.readAsBinaryString(files);
+         }
+         else{
+           
+            var toLoad = e.files[0];
+            //if (file.)
+            
+            if(toLoad)
+            {
+              alert("Loaded " + toLoad.name + " of size " + toLoad.size);
+              
+            }else
+            {
+              alert("Didn't load");
+            }
+            this.send("papapa", toLoad);
+          }
+      },
+            /* global Papa */
+            papapa:function(toLoad){
+              var myStore = this.get('store');
             var admins = myStore.peekAll('program-admin');
             
             // If the user has selected a department it will set it as the ID, if not set it to null
             // Should probably implement a way so that it is impossible to add department without a department
              var newDepartmentID = myStore.peekRecord('department', this.get('department'));
-            
-            var toLoad = file.files[0];
-        
-            if(toLoad)
-            {
-              alert("Here we are in faculties doing all sorts of crazy shit, here's a number: " + toLoad.size + " and here's the ID " + newDepartmentID);
-              
-            }else
-            {
-              alert("File failed to load!");
-            }
-            
-            /* global Papa */
             Papa.parse
             (toLoad, {
             	complete: function(results) 

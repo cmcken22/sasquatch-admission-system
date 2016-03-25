@@ -10,10 +10,6 @@ Router.map(function() {
   this.route('login', {path:'/'});
   this.route('authenticate');
 
-  this.route('purple', {path: '/its'} , function() {
-    this.route('itrs');
-    this.route('itr', {path:'itrs/:itr_id'});
-  });
 
   this.route('green', {path: '/students'} , function() {
     this.route('genders');
@@ -37,7 +33,7 @@ Router.map(function() {
   });
 
 
-  this.route('purple', {path: '/codes'} , function() {
+  this.route('purple', {path: '/settings'} , function() {
     this.route('programs');
     this.route('program', { path: 'programs/:program_id'});
     this.route('degree-codes');
@@ -48,31 +44,39 @@ Router.map(function() {
     this.route('course-codes');
     this.route('faculty');
     this.route('faculties');
-    
-    this.route('comment-code');
-    this.route('comment-codes');
     this.route('departments');
     this.route('department');
     this.route('program-admin', {path:'program-admins/:program-admin_id'});
     this.route('program-admins');
-    this.route('grade', {path:'grades/:grade_id'});
-    this.route('grades');
-    this.route('distribution-result');
-    this.route('distribution-results');
     this.route('program-records');
     this.route('program-record',{path:'program-records/:program-record_id'});
     this.route('logical-expression');
     this.route('logical-expressions');
-    
+    this.route('grade', {path:'grades/:grade_id'});
+    this.route('grades');
   });
-  this.route('codes');
+  this.route('purple', {path: '/grades'} , function() {
+   this.route('grade', {path:':grade_id'});
+    this.route('grades', { path: '/'});
+  });
+  
+
+
   this.route('students');
-  this.route('purple', {path: '/rules'} , function() {
+  this.route('purple', {path: '/distribute-students'} , function() {
     this.route('admission-rule');
     this.route('admission-rules');
+    this.route('distribution-result');
+    this.route('distribution-results');
+    this.route('comment-code');
+    this.route('comment-codes');
+    this.route('itrs');
+    this.route('itr', {path:'itrs/:itr_id'});
   });
-  this.route('adminPortal');
   this.route('distribute');
+  this.route('adminPortal');
+  this.route('distribute-students');
+  this.route('settings');
 });
 
 export default Router;

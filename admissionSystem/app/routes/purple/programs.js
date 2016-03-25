@@ -31,7 +31,9 @@ export default Ember.Route.extend({
         },
         
         deleteProgram: function(prog){
-          prog.destroyRecord();
+          if (confirm ('Are you sure you wish to delete this program?\n' + "This action cannot be undone")) {
+            prog.destroyRecord();
+          }
         },
         
         updateProgramCode: function(id, n, c, sc){

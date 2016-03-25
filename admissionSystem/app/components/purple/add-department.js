@@ -23,25 +23,49 @@ export default Ember.Component.extend({
             // this.get('routing').transitionTo('gender');
         },
         
-        uploadDepartments: function(file){
-            var myStore = this.get('store');
-            var departments = myStore.peekAll('department');
+        uploadDepartments: function(e){
             
-            // If the user has selected a faculty it will set it as the ID, if not set it to null
-            // Should probably implement a way so that it is impossible to add department without a faculty
-            var newFacultyID = myStore.peekRecord('faculty', this.get('faculty'));
             
-            var toLoad = file.files[0];
-        
+ alert(e.value.split(".").pop());
+         if(e.value.split(".").pop()=="xlsx"){
+          var files = e.files[0];
+          alert(files);
+            var reader = new FileReader();
+            var name = files.name;
+            var self = this;
+            reader.onload = function(e) {
+              var data = e.target.result;
+              
+              var workbook = XLSX.read(data, {type: 'binary'});
+              
+              /* DO SOMETHING WITH workbook HERE */
+              var sheet = workbook.Sheets[workbook.SheetNames[0]];
+              alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
+              var csvFile = XLSX.utils.sheet_to_csv(sheet, {"FS": ","});
+              self.send("papapa", csvFile);
+          };
+          reader.readAsBinaryString(files);
+         }
+         else{
+           
+            var toLoad = e.files[0];
+            //if (file.)
+            
             if(toLoad)
             {
-              alert("Here we are in faculties doing all sorts of crazy shit, here's a number: " + toLoad.size + " and here's the ID " + newFacultyID);
+              alert("Loaded " + toLoad.name + " of size " + toLoad.size);
               
             }else
             {
-              alert("File failed to load!");
+              alert("Didn't load");
             }
-            
+            this.send("papapa", toLoad);
+          }
+      },
+          papapa: function(toLoad){  /* global Papa */
+          var myStore = this.get('store');
+            var departments = myStore.peekAll('department');
+            var newFacultyID = myStore.peekRecord('faculty', this.get('faculty'));
             /* global Papa */
             Papa.parse
             (toLoad, {

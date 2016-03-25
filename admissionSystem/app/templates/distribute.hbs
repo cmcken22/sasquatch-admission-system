@@ -1,43 +1,59 @@
-<h1>Distribution</h1>
 
-<a href="#" class="button tiny" {{action 'distributeAll'}}>Distribute ALL</a>
 
-<ul class="circle">
-<ul>
-  {{#each model.student as |oneStudent|}}
-    <div class="row model-item">
-      <div class="large-12 columns">
-        
-        <div class='row'>
+
+<div class="large-9 columns">
+  <h1>Distribution</h1>
+  <a href="#" class="button tiny" {{action 'distributeAll'}}>Distribute ALL</a>
+  
+  <div class="circle">
+    {{#each model.student as |oneStudent|}}
+      <div class="row model-item">
+        <div class="large-12 columns">
           <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
-        </div>
-        
-        <a href="#" class="button tiny" {{action 'distribute' oneStudent.id}}>Distribute</a>
-        
-        {{#if (eq oneStudent.id currentID)}}
-          {{#each oneStudent.marks as |oneGrade|}}
-            <div class="large-12 columns">
-              <div class="large-10 columns">
-                {{oneGrade.course.name}} - {{oneGrade.course.code}} {{oneGrade.course.number}} - {{oneGrade.mark}}
+          <a href="#" class="button tiny edit-button" {{action 'distribute' oneStudent.id}}>Distribute</a>
+          
+          {{#if (eq oneStudent.id currentID)}}
+          <br>
+            <h5>Grades</h5>
+            {{#if (eq oneStudent.marks.length 0)}}
+              <p>{{oneStudent.firstName}} {{oneStudent.lastName}} does not have any grades.</p>
+            {{/if}}
+            {{#each oneStudent.marks as |oneGrade|}}
+              <div class="large-12 columns">
+                <div class="large-10 columns">
+                  {{oneGrade.course.name}} - {{oneGrade.course.code}} {{oneGrade.course.number}} - {{oneGrade.mark}}
+                </div>
+              <div class="large-2 columns">
+                {{purple.delete-grade ID = oneGrade.id}}
               </div>
-            <div class="large-2 columns">
-              {{purple.delete-grade ID = oneGrade.id}}
             </div>
-          </div>
-          {{/each}}
-          
-        <p>------------------------------------------------------------------------</p>
-          {{#each oneStudent.itrs as |itr|}}
-            <div class="large-12 columns">
-                <p>{{itr.academicprogramcode.name}}</p>
-                <p>Order: {{itr.order}}</p>
-                <p>Eligibility: {{itr.eligibility}}</p>
-            </div>
-          {{/each}}
-          
-        {{/if}}
+            {{/each}}
+            <br>
+            <h5>Intent to Registers</h5>
+            {{#if (eq oneStudent.itrs.length 0)}}
+              <p>{{oneStudent.firstName}} {{oneStudent.lastName}} does not have any ITRs.</p>
+            {{/if}}
+            {{#each oneStudent.itrs as |itr|}}
+              <div class="large-12 columns">
+                  <p>{{itr.academicprogramcode.name}}</p>
+                  <p>Order: {{itr.order}}</p>
+                  <p>Eligibility: {{itr.eligibility}}</p>
+              </div>
+            {{/each}}
+            
+          {{/if}}
+        </div>
       </div>
+    {{/each}}
+  </div>
+</div>
+<div class="large-3 columns">
+    <div class="side-nav">
+        <div class="side-nav-title"><h4>Distribution</h4></div>
+        <p>{{#link-to 'purple.itrs'}}Student ITRs{{/link-to}}</p>
+          <p>{{#link-to 'distribute'}}Distribute{{/link-to}}</p>
+            <p>{{#link-to 'purple.distribution-results'}}Distribution Results{{/link-to}}</p>
+            <p>{{#link-to 'purple.admission-rules'}}Manage Admission Rules{{/link-to}}</p>
+            <p>{{#link-to 'purple.comment-codes'}}Distribution Comment Codes{{/link-to}}</p>
     </div>
-  {{/each}}
-</ul>
-</ul>
+</div>

@@ -15,33 +15,47 @@
             <ul class="right">
               <li>{{#link-to 'welcome'}}Home{{/link-to}}</li>
               <li>{{#link-to 'students'}}Students{{/link-to}}</li>
-              <li>{{#link-to 'purple.programs'}}Codes{{/link-to}}</li>
+              {{!--<li>{{#link-to 'purple.programs'}}Codes{{/link-to}}</li>--}}
               <li>{{#link-to 'purple.itrs'}}ITR{{/link-to}}</li>
-              <li>{{#link-to 'adminPortal'}}Admin Portal{{/link-to}}</li>
-              <li>{{#link-to 'distribute'}}Distribution{{/link-to}}</li>
               
-              <li class="has-dropdown not-click"><a>Codes</a>
-                <ul class="dropdown">
-                  <li>{{#link-to 'purple.faculties'}}Edit Faculties{{/link-to}}</li>
-                  <li>{{#link-to 'purple.departments'}}Edit Departments{{/link-to}}</li>
-                  <li>{{#link-to 'purple.program-admins'}}Edit Program Administraions{{/link-to}}</li>
+              <li>{{#link-to 'distribute'}}Distribution{{/link-to}}</li>
+              <li>{{#link-to 'purple.grades'}}Grades{{/link-to}}</li>
+              
+              {{!--<li class="has-dropdown not-click"><a>Faculties</a>--}}
+              {{!--  <ul class="dropdown">--}}
+                  {{!--<li>{{#link-to 'purple.faculties'}}Edit Faculties{{/link-to}}</li>--}}
+                  {{!--<li>{{#link-to 'purple.departments'}}Edit Departments{{/link-to}}</li>--}}
+                  {{!--<li>{{#link-to 'purple.program-admins'}}Edit Program Administraions{{/link-to}}</li>--}}
 
-                  <li>{{#link-to 'purple.distribution-results'}}Add Distribution Result{{/link-to}}</li>
-                  <li>{{#link-to 'purple.program-records'}}Edit Program Records{{/link-to}}</li>
-                  <li>{{#link-to 'purple.logical-expressions'}}Add Logical Expression{{/link-to}}</li>
-                  <li>{{#link-to 'purple.admission-rules'}}Add Admission Rule{{/link-to}}</li>
+                  {{!--<li>{{#link-to 'purple.distribution-results'}}Add Distribution Result{{/link-to}}</li>--}}
+                  {{!--<li>{{#link-to 'purple.program-records'}}Edit Program Records{{/link-to}}</li>--}}
+                  {{!--<li>{{#link-to 'purple.logical-expressions'}}Add Logical Expression{{/link-to}}</li>--}}
+                  {{!--<li>{{#link-to 'purple.admission-rules'}}Add Admission Rule{{/link-to}}</li>--}}
                   {{!--<li>{{#link-to 'purple.grades'}}Edit Student Grades{{/link-to}}</li>--}}
+              {{!--  </ul>--}}
+              {{!--</li>--}}
+              <li class="has-dropdown not-click"><a>Settings</a>
+                <ul class="dropdown">
+                    <li>{{#link-to 'purple.faculties'}}Edit Faculties{{/link-to}}</li>
+                    <li>{{#link-to 'purple.departments'}}Edit Departments{{/link-to}}</li>
+                    <li>{{#link-to 'purple.program-admins'}}Edit Program Administraions{{/link-to}}</li>
+                    <li>{{#link-to 'purple.program-records'}}Edit Program Records{{/link-to}}</li>
+                    <li>{{#link-to 'purple.programs'}}Edit Program Codes{{/link-to}}</li>
+                    <li>{{#link-to 'purple.term-codes'}}Edit Term Codes{{/link-to}}</li>
+                    <li>{{#link-to 'purple.course-codes'}}Edit Course Codes{{/link-to}}</li>
+                  <li>{{#link-to 'purple.degree-codes'}}Edit Degree Codes{{/link-to}}</li>
                 </ul>
+              
               </li>
               
-              <li>{{#link-to 'purple.grades'}}Grades{{/link-to}}</li>
+              
               
               {{!--<li class="has-dropdown not-click"><a>Upload Data</a>--}}
               {{!--  <ul class="dropdown">--}}
               {{!--    <li>Upload Student List</li>--}}
               {{!--  </ul>--}}
               {{!--</li>--}}
-              
+              <li>{{#link-to 'adminPortal'}}Admin Portal{{/link-to}}</li>
               <li id="logout-button"> {{log-out}} </li>
             </ul>
           </section>

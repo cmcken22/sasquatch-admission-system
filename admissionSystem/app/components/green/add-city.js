@@ -19,7 +19,9 @@ export default Ember.Component.extend({
         addCity: function(){
                 
             var myStore = this.get('store');
+            
             var newProvinceID = myStore.peekRecord('province', this.get('province'));
+            
             var newCity = myStore.createRecord('city', {
                 name: this.get('city'),
                 province: newProvinceID

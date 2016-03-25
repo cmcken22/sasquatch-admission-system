@@ -1,7 +1,9 @@
 
 <br>
+<h4>{{thisStudent.firstName}} {{thisStudent.lastName}}'s ITR's</h4>
 {{#each thisStudent.itrs as |oneItr|}}
         <div class="row">
+            
             
             <div class="large-10 columns">
                 
@@ -22,7 +24,7 @@
                
             <div class="large-2 columns">
                 {{#if (not-eq currentITRedit oneItr.id)}}
-                <a href="#" class="button tiny" {{action 'setEdit' oneItr.id}}>Edit</a>
+                    <a href="#" class="button tiny" {{action 'setEdit' oneItr.id}}>Edit</a>
                 {{/if}}
             </div>
         </div>
@@ -48,7 +50,7 @@ Add program choice
         <select onchange={{action "setProgram" value="target.value"}}>
             <option value=100>Select Program</option>
                     
-            {{#each model.academicprogramcode as |oneProgram|}}
+            {{#each programModel as |oneProgram|}}
                 <option value={{oneProgram.id}}>{{oneProgram.name}}</option>
             {{/each}}
         </select>

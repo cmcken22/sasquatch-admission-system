@@ -12,6 +12,11 @@ export default Ember.Component.extend({
     eligibility: '100',
     currentITRedit: '0',
     
+    programModel: Ember.computed(function(){
+      return  this.get('store').findAll('academicprogramcode');
+    }),
+    
+    
     actions:{
         
         setProgram(programID){

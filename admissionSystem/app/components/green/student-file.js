@@ -8,52 +8,52 @@ export default Ember.Component.extend
 
   actions: 
   {
-      handleFile: function(e)
-       {
-        
-        var files = e.files[0];
-        //var i,f;
-        //for (i = 0, f = files[i]; i != files.length; ++i) {
-        var reader = new FileReader();
-        var name = files.name;
-        reader.onload = function(e) {
-            var data = e.target.result;
-            /*global XLSX*/
-            var workbook = XLSX.read(data, {type: 'binary'});
-            var csv = workbook.utils.sheet_to_csv;
-            this.send('uploadFile', csv);
-          /* DO SOMETHING WITH workbook HERE */
-      };
-          reader.readAsBinaryString(files);
-        //}
-      
+       handleFile: function(e) {
+         alert(e.value.split(".").pop());
+         if(e.value.split(".").pop()=="xlsx"){
+          var files = e.files[0];
+          alert(files);
+            var reader = new FileReader();
+            var name = files.name;
+            var self = this;
+            reader.onload = function(e) {
+              var data = e.target.result;
               
-         
-       }, 
-      uploadFile: function(file)
-      {
-        var myStore = this.get('store');
+              var workbook = XLSX.read(data, {type: 'binary'});
+              
+              /* DO SOMETHING WITH workbook HERE */
+              var sheet = workbook.Sheets[workbook.SheetNames[0]];
+              alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
+              var csvFile = XLSX.utils.sheet_to_csv(sheet, {"FS": ","});
+              self.send("papapa", csvFile);
+          };
+          reader.readAsBinaryString(files);
+         }
+         else{
+           
+            var toLoad = e.files[0];
+            //if (file.)
+            
+            if(toLoad)
+            {
+              alert("Loaded " + toLoad.name + " of size " + toLoad.size);
+              
+            }else
+            {
+              alert("Didn't load");
+            }
+            this.send("papapa", toLoad);
+          }
+      },
+
+      papapa: function(whatever){
+        /*global Papa*/
+         var myStore = this.get('store');
         var genders = myStore.peekAll('gender');
         var residencies = myStore.peekAll('residency');
         
-        var toLoad = file.files[0];
-        //if (file.)
-        
-        if(toLoad)
-        {
-          alert("Loaded " + toLoad.name + " of size " + toLoad.size);
-          
-        }else
-        {
-          alert("Didn't load");
-        }
-        
-        
-        
-        /*global Papa*/
-        
         Papa.parse
-        (toLoad, {
+        (whatever, {
         	complete: function(results) 
         	{
         		var first = true;
@@ -87,7 +87,7 @@ export default Ember.Component.extend
                     var genderString = gender.get('sex').toString();
                     if(genderString.toUpperCase() == student[3].toUpperCase())
                     {
-                      alert(student[3] + " from the file is the same as " + genderString + " from our database");
+                      //alert(student[3] + " from the file is the same as " + genderString + " from our database");
                       studentGender = gender;
                       genderMatch = true;
                     }
@@ -123,7 +123,7 @@ export default Ember.Component.extend
                     var resString = residency.get('residency').toString();
                     if(resString.toUpperCase() == student[5].toUpperCase())
                     {
-                      alert(student[5] + " from the file is the same as " + resString + " from our database");
+                      //alert(student[5] + " from the file is the same as " + resString + " from our database");
                       studentResidency = residency;
                       residencyMatch = true;
                     }

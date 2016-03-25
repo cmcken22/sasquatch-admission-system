@@ -19,12 +19,14 @@ export default Ember.Route.extend({
         rules: this.store.findAll('admission-rule'),
         course: this.store.findAll('course-code'),
         grade: this.store.findAll('grade'),
+        dbResult: this.store.findAll('distribution-result'),
+        comment: this.store.findAll('comment-code'),
       });
     },
     
     actions:{
     
-    selectThis: function(id){
+      selectThis: function(id){
         if(this.controller.get('currentID') == id){
           this.controller.set('currentID', '0');
           this.controller.set('edit', false); 
@@ -37,7 +39,8 @@ export default Ember.Route.extend({
       },
       
       distribute: function(studentID){
-          distribute(this.store.peekRecord('student', studentID));
+          var thisStu = this.store.peekRecord('student', studentID);
+          distribute(thisStu, calculateAVG(thisStu), this.store);
       },
       
       distributeAll: function(){
@@ -54,7 +57,7 @@ export default Ember.Route.extend({
           
             for(var i=0; i<students.length; i++){
               var studentAVG = calculateAVG(students[i]);
-              distribute(students[i], studentAVG);
+              distribute(students[i], studentAVG, self.store);
             }
             
           });
