@@ -55,12 +55,14 @@ Router.map(function() {
     this.route('grade', {path:'grades/:grade_id'});
     this.route('grades');
   });
-  this.route('purple', {path: '/grades'} , function() {
-   this.route('grade', {path:':grade_id'});
-    this.route('grades', { path: '/'});
-  });
-  
 
+  this.route('purple', {path: '/grades'} , function() {
+    this.route('grade', {path:':grade_id'});
+    this.route('grades', { path: '/'});
+    this.route('manage-grades');
+  });
+
+  this.route('grades');
 
   this.route('students');
   this.route('purple', {path: '/distribute-students'} , function() {
@@ -76,6 +78,7 @@ Router.map(function() {
   this.route('distribute');
   this.route('adminPortal');
   this.route('distribute-students');
+
   this.route('settings');
 });
 

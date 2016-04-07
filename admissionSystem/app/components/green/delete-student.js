@@ -4,6 +4,7 @@ export default Ember.Component.extend({
 
   store: Ember.inject.service(),
   routing: Ember.inject.service('-routing'),
+  
 
   actions: {
     deleteStudent: function(id){

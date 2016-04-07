@@ -2,6 +2,7 @@
     
     <h1>Add Distribution Result</h1>
     
+    <p>
     <select onchange={{action "setStudent" value="target.value"}}>
         <option value=100>Select Student</option>
 
@@ -9,14 +10,17 @@
             <option value={{oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</option>
         {{/each}}
      </select>
+     </p>
      
-     <select onchange={{action "setComment" value="target.value"}}>
+    <p>
+        <select onchange={{action "setComment" value="target.value"}}>
         <option value=100>Select Comment Code</option>
 
         {{#each model.comment as |oneComment|}}
             <option value={{oneComment.id}}>{{oneComment.code}} {{oneComment.description}}</option>
         {{/each}}
      </select>
+     </p>
      
     <div class="row">
         <div class="large-12 columns">

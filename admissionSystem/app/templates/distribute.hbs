@@ -1,12 +1,11 @@
-
-
-
 <div class="large-9 columns">
   <h1>Distribution</h1>
   <a href="#" class="button tiny" {{action 'distributeAll'}}>Distribute ALL</a>
-  
+  <a href="#" class="button tiny" {{action 'viewResults'}}>View Distribution Results</a>
+    
   <div class="circle">
-    {{#each model.student as |oneStudent|}}
+    {{#each sortedStudents as |oneStudent|}}
+    {{!--{{#each model.student as |oneStudent|}}--}}
       <div class="row model-item">
         <div class="large-12 columns">
           <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
@@ -14,30 +13,27 @@
           
           {{#if (eq oneStudent.id currentID)}}
           <br>
-            <h5>Grades</h5>
+            <h4>Grades</h4>
             {{#if (eq oneStudent.marks.length 0)}}
               <p>{{oneStudent.firstName}} {{oneStudent.lastName}} does not have any grades.</p>
             {{/if}}
             {{#each oneStudent.marks as |oneGrade|}}
               <div class="large-12 columns">
-                <div class="large-10 columns">
-                  {{oneGrade.course.name}} - {{oneGrade.course.code}} {{oneGrade.course.number}} - {{oneGrade.mark}}
-                </div>
-              <div class="large-2 columns">
-                {{purple.delete-grade ID = oneGrade.id}}
-              </div>
+                
+                  <p>{{oneGrade.mark}} : {{oneGrade.course.code}} {{oneGrade.course.number}} - {{oneGrade.course.name}}</p>
+                
             </div>
             {{/each}}
             <br>
-            <h5>Intent to Registers</h5>
+            <h4>Intent to Registers</h4>
             {{#if (eq oneStudent.itrs.length 0)}}
               <p>{{oneStudent.firstName}} {{oneStudent.lastName}} does not have any ITRs.</p>
             {{/if}}
             {{#each oneStudent.itrs as |itr|}}
               <div class="large-12 columns">
-                  <p>{{itr.academicprogramcode.name}}</p>
-                  <p>Order: {{itr.order}}</p>
-                  <p>Eligibility: {{itr.eligibility}}</p>
+                  <p>Order: {{itr.order}}<br>
+                  {{itr.academicprogramcode.name}}<br>
+                  Eligibility: {{itr.eligibility}}</p>
               </div>
             {{/each}}
             
@@ -57,3 +53,17 @@
             <p>{{#link-to 'purple.comment-codes'}}Distribution Comment Codes{{/link-to}}</p>
     </div>
 </div>
+
+  {{#if showPopup}}
+  <div {{action 'closePopup'}} class="modal-fog">
+    <div {{action 'dontClosePopup'}} class="modal-frame">
+      <div class="modal-title">
+        Here are the Results
+      </div>
+      
+      <div class="modal-body">
+        {{display-distribution-results model = model results = resultsArray}}
+      </div>
+    </div>
+  </div>
+{{/if}}

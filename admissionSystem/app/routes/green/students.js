@@ -2,10 +2,13 @@ import Ember from 'ember';
 import { parseStudentNum } from '../../helpers/parse-student-num';
 import { getFirstName } from '../../helpers/parse-name';
 import { getLastName } from '../../helpers/parse-name';
+import { sortAlphabetically } from '../../helpers/sort-alphabetically';
 
 export default Ember.Route.extend({
+    
     routing: Ember.inject.service('-routing'),
     store: Ember.inject.service(),
+    
     searchByNum: '0',
     searchByFirstName: '0',
     searching: 'x',
@@ -18,7 +21,7 @@ export default Ember.Route.extend({
     count: '0',
     first: '',
     last: '',
-    
+
     model(){
         return Ember.RSVP.hash({
             genders: this.store.findAll('gender'),
@@ -28,10 +31,11 @@ export default Ember.Route.extend({
             academicprogramcode: this.store.findAll('academicprogramcode'),
             city: this.store.findAll('city'),
             itr: this.store.findAll('itr'),
-            grade: this.store.findAll('grade')
+            grade: this.store.findAll('grade'),
+            //rolePermission: this.store.findAll('grade')
         });
     },
-    
+
     actions:{
         searchByNum: function(){
             this.controller.set('searchByNum', true);

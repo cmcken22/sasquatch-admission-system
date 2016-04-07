@@ -5,7 +5,7 @@ var distributionSchema = mongoose.Schema({
     date: String,
     comment: {type: mongoose.Schema.ObjectId, ref: ('commentModel')},
     student: {type: mongoose.Schema.ObjectId, ref: ('studentModel')},
-    
+    failReason: String,
 }, {
     versionKey: false // to disable the "__v" attribute
 });

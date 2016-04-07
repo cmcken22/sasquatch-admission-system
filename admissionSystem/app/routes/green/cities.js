@@ -76,7 +76,6 @@ export default Ember.Route.extend({
         
         var province  = myStore.peekRecord('province', this.controller.get('province'));
         
-        
         var newProvinceID = myStore.peekRecord('province', this.get('province'));
         
         myStore.findRecord('city', id).then(function(city) {

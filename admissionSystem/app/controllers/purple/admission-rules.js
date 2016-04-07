@@ -10,18 +10,22 @@ export default Ember.Controller.extend({
       
         saveRule: function(ruleID){
             var myStore = this.get('store');
-            let thisProgram = myStore.peekRecord('academicprogramcode', this.get('currentID'));
-            let thisRule = myStore.peekRecord('admission-rule', ruleID);
+            var thisProgram = myStore.peekRecord('academicprogramcode', this.get('currentID'));
+            var thisRule = myStore.peekRecord('admission-rule', ruleID);
             
             thisProgram.get('rules').then((rules) => {
                 rules.pushObject(thisRule);
                 thisProgram.save();
             });
-            // thisRule.get('programs').then((programs) => {
-            //     programs.pushObject(thisProgram);
-            //     thisRule.save();
-            // });
+            thisRule.get('programs').then((programs) => {
+                programs.pushObject(thisProgram);
+                thisRule.save();
+            });
             
+        },
+        
+      setCourse(courseID){
+            this.set('course', courseID);
         },
         
         removeRule:function(ruleID){

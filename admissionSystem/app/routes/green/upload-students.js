@@ -5,6 +5,7 @@ export default Ember.Route.extend({
     routing: Ember.inject.service('-routing'),
     store: Ember.inject.service(),
     
+   
    model(){
         return Ember.RSVP.hash({
             genders: this.store.findAll('gender'),

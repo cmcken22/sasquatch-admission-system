@@ -1,19 +1,19 @@
 <h2>Programs</h2>
 <ul class="circle">
     <ul>
-      {{#each model as |oneProgram|}}
+      {{#each model.program as |oneProgram|}}
           <div class="row model-item">
             <div class="large-12 columns">
               
-              
+            
               <div class='row'>
-                <div class='editItem' {{action 'selectThis' oneProgram.id}}>{{oneProgram.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneProgram.id}}>Edit</a>
+                <div class='editItem' {{action 'selectThis' oneProgram.id}}>{{oneProgram.name}}</div> {{#if MST01IsPermitted}}<a href="#" class="button tiny edit-button" {{action 'selectThis'  oneProgram.id}}>Edit</a>{{/if}}
               </div> 
-              
-              Code - {{oneProgram.code}}<br>
-              Subcode - {{oneProgram.subCode}}<br>
+             
+
               {{#if (eq oneProgram.id currentID)}}
-              <br>
+              
+              <div class="panel callout admin-panel">
                 <label>Name
                   {{input value=oneProgram.name type="text"}}
                 </label>
@@ -23,11 +23,35 @@
                 <label>SubCode
                   {{input value=oneProgram.subCode type="text"}}
                 </label>
+                <h5>Settings for Distribution</h5>
                 
-                <a href="#" class="button tiny" {{action 'updateProgramCode' oneProgram.id oneProgram.name oneProgram.code oneProgram.subCode}}>Save</a>
-                <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
-                <a href="#" class="button tiny" {{action 'deleteProgram' oneProgram}}>Delete</a>
+                <label>Eligibility Comment Code
+                <select onchange={{action 'setCode' value="target.value"}}>
+                  
+                    {{#each model.commentCode as |oneCode|}}
+                     {{#if (eq oneCode.id oneProgram.acceptionCode.id)}}
+                       <option selected value={{oneCode.id}}>{{oneCode.code}} - {{oneCode.description}}</option>
+                      {{/if}}
+                      {{#if (not-eq oneCode.id  oneProgram.acceptionCode.id)}}
+                        <option value={{oneCode.id}}>{{oneCode.code}} - {{oneCode.description}}</option>
+                      {{/if}}
+                    {{/each}}
+                    </select>
+                  </label>
+                  
+                  <label>Is there a minimum acceptance average for this program?
+                    {{input value=oneProgram.minAverage type="text"}}
+                  </label>
+                  
+                  
+                  
+                  {{#if MST01IsPermitted}}
+                  <a href="#" class="button tiny" {{action 'updateProgramCode' oneProgram.id oneProgram.name oneProgram.code oneProgram.subCode oneProgram.minAverage}}>Save</a>
+                  <a href="#" class="button tiny" {{action 'cancel'}}>Cancel</a>
+                  <a href="#" class="button tiny" {{action 'deleteProgram' oneProgram}}>Delete</a>
+                  {{/if}}
                 
+                </div>
               {{/if}}  
                 
             </div>
@@ -35,4 +59,6 @@
       {{/each}}
     </ul>
 </ul>
+{{#if MST01IsPermitted}}
 {{purple.add-program}}
+{{/if}} 

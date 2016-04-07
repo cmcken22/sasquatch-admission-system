@@ -15,8 +15,9 @@
           <div class="row model-item">
             <div class="large-10 columns">
                 <p>{{oneResult.student.firstName}} {{oneResult.student.lastName}}</p>
-                <p> Comment Code: {{oneResult.comment.code}}</p>
-                <p> Description: {{oneResult.comment.description}}</p>
+                <p> Comment Code: {{oneResult.comment.code}}<br>
+                Description: {{oneResult.comment.description}}</p>
+                {{#if oneResult.failReason}}<p>Fail Reason: {{oneResult.failReason}}</p>{{/if}}
                 <p> Date: {{oneResult.date}}</p>
               </div>
               <div class="large-2 columns">

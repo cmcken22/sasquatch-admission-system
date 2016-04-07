@@ -27,7 +27,7 @@ export default Ember.Route.extend({
           this.controller.set('edit', false); 
         }else{
           this.controller.set('edit', true); 
-          this.store.findRecord('student', id).get('marks');
+          //this.store.findRecord('student', id).get('marks');
           this.controller.set('currentID', id);
         }
       },

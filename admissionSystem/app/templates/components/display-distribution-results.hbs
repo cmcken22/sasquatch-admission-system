@@ -1,0 +1,25 @@
+
+<h4>View the distribution results for a program.</h4>
+
+<select onchange={{action 'selectProgram' value="target.value"}}>
+    <option selected value='0'>Select a Program</option>
+    {{#each model.program as |oneProgram|}}
+        <option value={{oneProgram.id}}>{{oneProgram.name}}</option>
+    {{/each}}
+</select>
+
+
+{{#each model.program as |oneProgram|}}
+    {{#if (eq oneProgram.id currentProgram)}}
+       
+        <h5>Displaying students placed into {{oneProgram.name}}</h5>
+        {{#each results as |result|}}
+            {{#if (eq result.comment.id oneProgram.acceptionCode.id)}}
+                {{result.student.firstName}} {{result.student.lastName}}
+                <br>
+            {{/if}}
+        {{/each}}
+        
+        
+    {{/if}}
+{{/each}}

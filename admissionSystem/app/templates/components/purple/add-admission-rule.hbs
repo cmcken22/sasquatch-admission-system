@@ -10,22 +10,8 @@
                 {{input value=description id="description" type="text"}}
             </label>
             
-            <select onchange={{action "setCourse" value="target.value"}}>
-                <option value=100>Select Course</option>
-            
-                {{#each model.courseCode as |oneCourse|}}
-                    <option value={{oneCourse.id}}>{{oneCourse.code}} {{oneCourse.number}} - {{oneCourse.name}}</option>
-                {{/each}}
-            </select>
-            <label>Minimum Mark Required
-                {{input value=minNumber id="minNumber" type="text"}}
-            </label>
-            
         </div>
     </div>
     
 </form>
-<br>
 <a href="#" class="button radius" {{action 'addAdmissionRule'}}>Save</a>
-
-<a href="#" class="button radius" >Cancel</a>

@@ -7,20 +7,18 @@
             <div class="large-12 columns">
             
               <div class='row'>
-                <div class='editItem' {{action 'selectThis' oneCity.id oneCity.province}}>{{oneCity.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis'  oneCity.id}}>Edit</a>
+                <div class='editItem' {{action 'selectThis' oneCity.id oneCity.province}}>{{oneCity.name}}</div><a href="#" class="button tiny edit-button" {{action 'selectThis' oneCity.id}}>Edit</a>
               </div>
+              
               {{#if (eq oneCity.id currentID)}}
-              
-              
               
               <label>City
                 {{input value=oneCity.name type="text"}}
               </label>
              
               <label>Within which country ?
+                
                 <select onchange={{action 'setCountry' value="target.value"}}>
-                  
-                  
                    {{#each model.countries as |oneCountry|}}
                      {{#if (eq oneCountry.id country)}}
                        <option selected value={{oneCountry.id}}>{{oneCountry.name}}</option>
@@ -30,6 +28,7 @@
                       {{/if}}
                   {{/each}}
                 </select>
+              
               </label>
 
 

@@ -43,7 +43,7 @@ export default Ember.Component.extend({
             });
 
             
-            thisStudent.get('marks').then((marks) => {
+            thisStudent.get('grades').then((marks) => {
                 marks.pushObject(newGrade);
                 thisStudent.save();
             });

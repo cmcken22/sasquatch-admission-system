@@ -1,5 +1,3 @@
-
-
 <h3>Manage Admission Rules For a Program</h3>
 <div class="circle">
       {{#each model.academicprogramcode as |oneProgram|}}
@@ -11,22 +9,45 @@
               </div>
               {{#if (eq oneProgram.id currentID)}}
                   
-                  <h4>Here are the Rules for {{oneProgram.name}}</h4>
+                <div class="panel callout admin-panel large-10 columns">
+                  <h5>Admission Rules for {{oneProgram.name}}</h5>
                   <br>
-                  {{#if (eq oneProgram.rules.length 0)}}
-                  There are no admission rules for {{oneProgram.name}}
-                  {{/if}}
+                  <div class="row  model-item">
+                  {{#if editAverage}}
                   
+                   <label>Set a minumum average required
+                      {{input value=oneProgram.minAverage id="minimumAve" type="text"}}
+                    </label>
+                    <a href="#" style="float:left" class="button tiny edit-button" {{action 'clearAverage' oneProgram.id}}>Clear</a>
+                    <a href="#" style="margin-left:10px" class="button tiny edit-button" {{action 'toggleEditAverage' oneProgram.id oneProgram.minAverage}}>Cancel</a>
+                    <a href="#" class="button tiny edit-button" {{action 'saveAverage' oneProgram.id oneProgram.minAverage}}>Save</a>
+                  
+                  {{else}}
+                    {{#if (gt oneProgram.minAverage 0)}}
+                      Required Average: {{oneProgram.minAverage}}
+                    {{else}}
+                      Required Average: N/A
+                    {{/if}}
+                    <a href="#" class="button tiny edit-button" {{action 'toggleEditAverage' oneProgram.id oneProgram.minAverage}}>Edit</a>
+                    
+                  {{/if}}
+                  </div>
+                  {{#if (eq oneProgram.rules.length 0)}}
+                    <p>There are no admission rules for {{oneProgram.name}}</p>
+                  {{else}}
+                    <br>
                     {{#each oneProgram.rules as |oneRule|}}
-                      <div class="row">
-                        <div class="large-2 columns"></div>
-                        <div class="large-8 columns model-item">
+                      <div class="row  model-item">
+                        
+                        
                           {{oneRule.description}}
                             <a href="#" class="button tiny edit-button" {{action 'removeRule' oneRule.id}}>Remove Rule</a>
-                          </div>
-                        <div class="large-2 columns"><br></div>                      
+                          
+                                           
                       </div>
                     {{/each}}
+                    
+                    {{/if}}
                     
                     {{#if (eq addNewRule false)}}
                       <a href="#" class="button tiny newRule-button" {{action 'addNewRule'}}>Add Rules</a>
@@ -49,6 +70,7 @@
                     <a href="#" class="button tiny newRule-button" {{action 'addNewRule'}}>Cancel</a>
                     
                   {{/if}}
+                  </div>
               {{/if}}
               
               
@@ -57,25 +79,69 @@
       {{/each}}
     
 </div>
-{{purple.add-admission-rule model = model}}
-<br>
+
 <h2>All Admission Rules</h2>
 <div class="circle">
       {{#each model.rule as |oneRule|}}
         <div class="row model-item">
           <div class="large-10 columns">
-            {{oneRule.description}}
+            <h5>{{oneRule.description}}</h5>
           </div>
         
           <div class="large-2 columns">
-            <a href="#" class="button tiny edit-button" {{action 'deleteRule'  oneRule}}>Delete</a>
+            <a href="#" class="button tiny edit-button" {{action 'manageRule' oneRule.id}}>Manage</a>
           </div>
+        
+        
+        {{#if (eq oneRule.id currentRule)}}
+          {{#if addNewLogicalExpresson}}
+            <label>Admission Rule Description
+                {{input value=oneRule.description id="desc" type="text"}}
+            </label>
+          {{/if}}
+        
+        
+          {{#each oneRule.expressions as |oneExpression|}}
+          <div class="row">
+          
+            <div class="large-8 columns">
+              <p>Minimum mark of {{oneExpression.minMark}}: {{oneExpression.course.number}} {{oneExpression.course.code}}</p>
+            </div>
+            <div class="large-2 columns">
+              <a href="#" class="button tiny edit-button" {{action 'deleteExpression' oneExpression}}>Delete</a>
+            </div>
+          </div>  
+            
+          {{/each}}
+          
+          {{#if addNewLogicalExpresson}}
+            Create a new logical expression for this rule.<br>
+            <select onchange={{action "setCourse" value="target.value"}}>
+                <option value=100>Select Course</option>
+            
+                {{#each model.courseCode as |oneCourse|}}
+                    <option value={{oneCourse.id}}>{{oneCourse.code}} {{oneCourse.number}} - {{oneCourse.name}}</option>
+                {{/each}}
+            </select>
+            
+            <label>Minimum Mark Required
+                {{input value=minNumber id="minNumber" type="text"}}
+            </label>
+            <a href="#" style="margin-left:10px;" class="button tiny edit-button" {{action 'addNewCourse' }}>Cancel</a>
+            <a href="#" class="button tiny edit-button" {{action 'saveLogicalExpression' minNumber oneRule.description}}>Save Expression</a>
+          {{else}}
+             <a href="#" style="float:left;" class="button tiny" {{action 'addNewCourse'}}>Edit</a>
+          {{/if}}
+        {{/if}}
+        
         </div>
       {{/each}}
+      
+      
+      
       {{#if (eq model.rule.length 0)}}
         There are no admission rules in the system.
       {{/if}}
 
 </div>
-<br>
-<br>
+{{purple.add-admission-rule model = model}}

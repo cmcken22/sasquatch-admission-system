@@ -1,1 +1,7 @@
-{{green.add-student-form-component model = model}}
+{{#if MST01IsPermitted}}
+    {{green.add-student-form-component model = model}}
+{{else}}
+
+ <p>You do not have the permission to Add Students (MST01)</p><br>
+    <p>Contact an administrator</p>
+    {{/if}}

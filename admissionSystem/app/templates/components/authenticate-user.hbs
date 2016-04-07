@@ -1,38 +1,4 @@
-{{!--<!-- Display the login screen with the main application background -->--}}
-{{!--<section class="hero">--}}
-{{!--    <div class="row intro">--}}
-{{!--        <div>--}}
-{{!--            <div class="row">--}}
-{{!--                <div class="medium-6 medium-centered large-4 large-uncentered columns">--}}
-                    
-{{!--                    <form>--}}
-{{!--                        <div class="row column log-in-form">--}}
-{{!--                            <h3 class="text-center">Log in to <br>Western's Engineering Admission System</h3>--}}
-{{!--                            <label>User Name--}}
-{{!--                              {{input value=name  type="text" placeholder="user name"}}--}}
-{{!--                            </label>--}}
-{{!--                            {{#if showPass}}--}}
-{{!--                                <label>Password--}}
-{{!--                                    {{input value=password  type="text" placeholder="password"}}--}}
-{{!--                                </label>--}}
-{{!--                            {{else}}--}}
-{{!--                                <label>Password--}}
-{{!--                                    {{input value=password  type="password" placeholder="password"}}--}}
-{{!--                                </label>--}}
-{{!--                            {{/if}}--}}
-{{!--                            {{input type='checkbox' checked=showPass}}<label for="show-password">Show password</label>--}}
-                            
-{{!--                            <p><a href="#" class="button radius" {{action 'login'}}>Log In</a></p>--}}
 
-{{!--                            <p class="text-center"><a href="#" {{action 'forgot'}}>Forgot your password?</a></p>--}}
-{{!--                        </div>--}}
-{{!--                    </form>--}}
-                    
-{{!--                </div>--}}
-{{!--            </div>--}}
-{{!--        </div>--}}
-{{!--    </div>--}}
-{{!--</section>--}}
 
 <!-- Display the login screen with the main application background -->
 {{#if isPasswordChanging}}
@@ -77,8 +43,9 @@
             <div  >
                 <div class="row">
                     <div class="medium-6 medium-centered large-4 large-uncentered columns">
-                        <div class="row column log-in-form">
-                            <h3 class="text-center">Log in to <br> *** Sample SAS ***</h3>
+                        <div class="row column log-in-form login-panel">
+                            <div class="center-align"><img src='/images/SASquatch_logo.png' style= "height:70px; width: auto; margin-top: 0px"/><br></div>
+                            <h3 class="text-center">Log into Student Admission System<br></h3>
                             <label>User Name
                               {{input value=name  type="text" placeholder="user name"}}
                             </label>

@@ -30,7 +30,14 @@ export default Ember.Component.extend({
   currentYear: '',
   studentNumber: '777',
   st: '',
-  
+  MST01IsPermitted: Ember.computed(function(){ //edit student stuff
+    var authentication = this.get('oudaAuth');
+    if (authentication.getName === "Root") {
+      return true;
+    } else {
+      return (authentication.get('userCList').indexOf('MST01') >= 0);
+    }
+  }),
   update2(){
     var sNum = this.get('selectedStudent.studentNum');
     var sNum2 = parseStudentNum(sNum);
@@ -39,7 +46,24 @@ export default Ember.Component.extend({
     // this.set('studentNum', sNum);
   },
 
-
+  resModel: Ember.computed(function(){
+    return this.get('store').findAll('residency');
+  }),
+  gendersModel: Ember.computed(function(){
+    return this.get('store').findAll('gender');
+  }),
+    loadModel: Ember.computed(function(){
+    return this.get('store').findAll('load');
+  }),
+  countryModel: Ember.computed(function(){
+    return this.get('store').findAll('country');
+  }),
+    provinceModel: Ember.computed(function(){
+    return this.get('store').findAll('province');
+  }),
+  cityModel: Ember.computed(function(){
+    return this.get('store').findAll('city');
+  }),
   
   actions: {
     
@@ -54,6 +78,31 @@ export default Ember.Component.extend({
     selectYear(year) {
       this.set('year', year);
     },
+    setSex(sex) {
+      this.set('sex', sex);
+      
+    },
+    
+    setRes(residency) {
+      this.set('residency', residency);
+    },
+    
+    setLoad(load) {
+      this.set('load', load);
+      
+    },
+    
+    setCountry(country) {
+      this.set('country', country);
+    },
+    
+    setProvince(province) {
+      this.set('province', province);
+    },
+    
+    setCity(city) {
+      this.set('city', city);
+    },
     
     update: function(){
       var sNum = this.get('selectedStudent.studentNum');
@@ -65,47 +114,58 @@ export default Ember.Component.extend({
     
     edit: function(dob){
       //this.update2();
-      this.set('currentDay', getDay(dob));
-      this.set('day', getDay(dob));
-      this.set('currentMonth', getMonth(dob));
-      this.set('month', getMonth(dob));
-      this.set('currentYear', getYear(dob));
-      this.set('year', getYear(dob));
-      console.log('editing');
-      this.set('isEditing', true);
+      if(this.get('isEditing') == true){
+        this.set('isEditing', false);
+      }else{
+        
+        this.set('currentDay', getDay(dob));
+        this.set('day', getDay(dob));
+        this.set('currentMonth', getMonth(dob));
+        this.set('month', getMonth(dob));
+        this.set('currentYear', getYear(dob));
+        this.set('year', getYear(dob));
+
+        console.log('editing');
+        this.set('isEditing', true);
+      }
     },
     
-    // addingGrade: function(){
-    //   this.set('isAddingGrade',true);
-    // },
-    
+
     save: function(id, day, month, year){
       var myStore = this.get('store');
       var date = year+"-"+month+"-"+day;
       var self = this;
-      // var stu = myStore.findRecord('student', id);
-      // confirm('stu: ' + stu.id);
+      
+      
+      
       myStore.findRecord('student', id).then(function(student) {
         var fn = self.get('selectedStudent.firstName');
         var ln = self.get('selectedStudent.lastName');
         var sn = self.get('selectedStudent.studentNum');
+        
+        var newCityID = myStore.peekRecord('city', self.get('city'));
+        var newGenderID = myStore.peekRecord('gender', self.get('sex'));
+        var newResidencyID = myStore.peekRecord('residency', self.get('residency'));
+        var newLoadID = myStore.peekRecord('load', self.get('load'));
+        
         var sNum = validateStudentNumber(sn);
         var count = 0;
-        // confirm('STUDENT: ' + student.firstName);
-        // confirm('student.firstName: ' + student.firstName);
-        // confirm('fn: ' + fn);
+        
         if(validateStudentName(fn, ln) == 1){
           if(sNum != 0){
-            //ERROR WAS HERE - TRYING TO SET isEditing TO FALSE
-            // isEding is undefined here
-            // this.set('isEditing', false);
+            
             student.set('firstName', fn);
             student.set('lastName', ln);
             student.set('studentNum', sNum);
             student.set('DOB', date);
-            student.save();  // => PATCH to /students/:student_id
+            student.set('gender', newGenderID);
+            student.set('city', newCityID);
+            student.set('load', newLoadID);
+            student.set('residency', newResidencyID);
+
+            student.save();  
             self.set('isEditing', false);
-            // this.get('routing').transitionTo('students');
+            
           }
         }
       });

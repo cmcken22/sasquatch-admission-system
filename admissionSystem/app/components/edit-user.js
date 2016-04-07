@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   isResettingPassword: null,
   EU001IsPermitted: Ember.computed(function(){ //Edit User
     var authentication = this.get('oudaAuth');
+    
     if (authentication.getName === "Root") {
       return true;
     } else {
@@ -34,6 +35,7 @@ export default Ember.Component.extend({
       return (authentication.get('userCList').indexOf("EU003") >= 0);
     }
   }),
+  
 
   actions: {
     saveUser () {

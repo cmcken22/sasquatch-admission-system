@@ -11,7 +11,8 @@ export default Ember.Route.extend({
             programRecord: this.store.findAll('program-record'),
             courseCode: this.store.findAll('course-code'),
             termCode: this.store.findAll('term-code'),
-            degreeCode: this.store.findAll('degree-code')
+            degreeCode: this.store.findAll('degree-code'),
+            grades: this.store.findAll('grade')
         });
     }
 });

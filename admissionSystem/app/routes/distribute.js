@@ -9,6 +9,9 @@ export default Ember.Route.extend({
     
     edit: false,
     currentID: '0',
+    showPopup: false,
+    resultsArray: new Array(),
+    dontClose: false,
     
     model() {
       return Ember.RSVP.hash({
@@ -17,6 +20,7 @@ export default Ember.Route.extend({
         itr: this.store.findAll('itr'),
         program: this.store.findAll('academicprogramcode'),
         rules: this.store.findAll('admission-rule'),
+        expressions: this.store.findAll('logical-expression'),
         course: this.store.findAll('course-code'),
         grade: this.store.findAll('grade'),
         dbResult: this.store.findAll('distribution-result'),
@@ -43,9 +47,22 @@ export default Ember.Route.extend({
           distribute(thisStu, calculateAVG(thisStu), this.store);
       },
       
+      closePopup: function(){
+        if(this.controller.get('dontClose') === true)
+          this.controller.set('dontClose', false);
+        else
+          this.controller.set('showPopup', false); 
+      },
+      
+      dontClosePopup: function(){
+        this.controller.set('dontClose', true);
+        this.controller.set('showPopup', true); 
+      },
+      
       distributeAll: function(){
         
           var students = new Array();
+          var distResults = new Array();
           var self = this;
           
           this.store.findAll('student').then(function(student){
@@ -57,10 +74,25 @@ export default Ember.Route.extend({
           
             for(var i=0; i<students.length; i++){
               var studentAVG = calculateAVG(students[i]);
-              distribute(students[i], studentAVG, self.store);
+              //var newResult = distribute(students[i], studentAVG, self.store)
+          
+              var newResult = distribute(students[i], studentAVG, self.store);
+              if(newResult){
+                distResults.push(newResult);
+              };
+
             }
             
+              self.controller.set('resultsArray', distResults);
+              self.controller.set('showPopup', true); 
+              
           });
+          
       },
+      
+      viewResults: function(){
+        this.controller.set('showPopup', true);
+      },
+      
     }
 });

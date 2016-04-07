@@ -1,0 +1,70 @@
+<br>
+{{#if thisStudent.grades.length}}
+    <h4>{{thisStudent.firstName}} {{thisStudent.lastName}}'s Grades</h4>
+    {{#if MST01IsPermitted}}
+    {{else}}
+        <p>You do not have permission to edit this (MST01), contact System Admin</p>
+    {{/if}}
+    {{#each thisStudent.grades as |oneGrade|}}
+    
+    <div class="row">
+    
+         {{#if MST01IsPermitted}}
+            <div class="large-10 columns">
+                <p>{{oneGrade.mark}} : {{oneGrade.course.code}} {{oneGrade.course.number}}</p>
+            </div>
+            
+            {{#if (eq currentGradeEdit oneGrade.id)}}
+                <a href="#" class="button tiny" {{action 'deleteGrade' oneGrade}}>Delete</a>
+                <label>Mark
+                    {{input value=oneGrade.mark id="mark" type="text"}} 
+                </label>
+                <a href="#" class="button radius" {{action 'editGrade' oneGrade.id oneGrade.mark}}>Save</a>
+                <a href="#" class="button radius" {{action 'setEdit'}}>Cancel</a>
+            {{/if}}
+            
+            <div class="large-2 columns">
+                {{#if (not-eq currentGradeEdit oneGrade.id)}}
+                    <a href="#" class="button tiny" {{action 'setEdit' oneGrade.id}}>Edit</a>
+                {{/if}}
+            </div>
+        {{else}}
+            <div class="large-10 columns">
+                <p>{{oneGrade.mark}} : {{oneGrade.course.code}} {{oneGrade.course.number}}</p>
+            </div>
+        {{/if}}
+        </div>
+    {{/each}}
+{{else}}
+    <p>{{thisStudent.firstName}} {{thisStudent.lastName}} does not have any Grades</p>
+{{/if}}
+
+{{#if (eq isAdding false)}}
+{{#if MST01IsPermitted}}
+    <a href="#" class="button radius" {{action 'addToggle'}}>Add Grade</a>
+{{/if}}
+{{/if}}
+
+{{#if (eq isAdding true)}}
+    {{#if MST01IsPermitted}}
+    <h5>Add Grade</h5>
+    
+        <form id="add-student-form">
+        
+            <label>Select course
+              <select onchange={{action "setCourse" value="target.value"}}>
+                <option value=100>Select Course</option>
+                {{#each courseCodeModel as |oneCourse|}}
+                    <option value={{oneCourse.id}}>{{oneCourse.code}} {{oneCourse.number}} - {{oneCourse.name}}</option>
+                {{/each}}
+             </select>
+            </label>
+            <label>Mark
+                {{input value=newMark id="newMark" type="text"}} 
+            </label>        
+    
+        </form>
+        <a href="#" class="button radius" {{action 'addGrade' newMark}}>Save</a>
+        <a href="#" class="button radius" {{action 'addToggle'}}>Cancel</a>
+    {{/if}}
+{{/if}}

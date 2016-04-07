@@ -33,6 +33,7 @@ exports.post =  function (request, response) {
         date: request.body.distributionResult.date,
         comment: request.body.distributionResult.comment,
         student: request.body.distributionResult.student,
+        failReason: request.body.distributionResult.failReason,
     });
     
     distributionResult.save(function (error) {

@@ -21,7 +21,6 @@ export default Ember.Component.extend
           var files = e.files[0];
           alert(files);
             var reader = new FileReader();
-            var name = files.name;
             var self = this;
             reader.onload = function(e) {
               var data = e.target.result;
@@ -58,6 +57,7 @@ export default Ember.Component.extend
         
         var myStore = this.get('store');
         var students = myStore.peekAll('student');
+        var grades = myStore.peekAll('grade');
         var programCodes = myStore.peekAll('program-record');
         var termCodes = myStore.peekAll('term-code');
         var degreeCodes = myStore.peekAll('degree-code');
@@ -74,6 +74,7 @@ export default Ember.Component.extend
 		        var programMatch = false;
 		        var termMatch = false;
 		        var courseMatch = false;
+		        var gradeMatch = false;
         		
         		var studentObj, programObj, degreeObj, termObj, courseObj;
         		
@@ -116,13 +117,14 @@ export default Ember.Component.extend
                                     if(student.get('studentNum') != null)
                                         studentString = student.get('studentNum').toString();
                                     else
-                                        studentString = "YAWG SL'LOTH BECKONS";
+                                        studentString = "ERROR";
                                     
                                     if(studentString.toUpperCase() == grade[1].toUpperCase())
                                     {
                                       //alert(grade[1] + " from the file is the same as " + student.get('firstName').toString() + " from our database");
                                       studentObj = student;
                                       studentMatch = true;
+                                      
                                     }
                                 }
                               }
@@ -234,7 +236,6 @@ export default Ember.Component.extend
         		      
         		      if(studentMatch)
         		      {
-        		          //timetofindcourseskillmepleasesotired
         		          // Program code, then term code, then degreeCode
                             courseMatch = false;
                             courseCodes.forEach(function(course) 
@@ -270,9 +271,34 @@ export default Ember.Component.extend
                                 }
                               });
                               
+                              // Now we check per duplicate grades per student
+                              if(courseMatch)
+                              {
+                                  // Now that we've found a matching student in the database, it can be safely assumed that we can overwrite the
+                                  // grade provided that the course name, section, and student matches
+                                  grades.forEach(function(dbGrade)
+                                  {
+                                     
+                                     if(dbGrade.get('student').get('id') == studentObj.id)
+                                     {
+                                         if(dbGrade.get('course').get('id') == courseObj.id)
+                                         {
+                                             if(dbGrade.get('section').toUpperCase() == grade[4])
+                                             {
+                                                 //alert("We found a duplicate grade for " + studentObj.get('firstName') + " in the course " + courseObj.get('name'));
+                                             
+                                                 gradeMatch = true;
+                                                 dbGrade.set('mark', grade[7]);
+                                                 dbGrade.save();
+                                             }
+                                         }
+                                     }
+                                  });
+                              }
+                              
                               // So now we should have a course. Making one here would put me one over my callback comfort zone, so let's just asssume it exists
                               // Actually might not be so bad, but don't have time to play son
-                              if(courseMatch)
+                              if(courseMatch && !gradeMatch)
                               {
                                   var newGrade = myStore.createRecord('grade', {
                                         student: studentObj,
@@ -289,7 +315,7 @@ export default Ember.Component.extend
                                     });;
                               }else
                               {
-                                  alert(grade[5] + " not found in the database!");
+                                 
                               }
         		      }
             		  }
@@ -298,6 +324,7 @@ export default Ember.Component.extend
             	}
               
             });
+            this.get('routing').transitionTo('purple.grades');
       }
       
   }

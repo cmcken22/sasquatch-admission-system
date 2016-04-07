@@ -25,19 +25,44 @@ exports.getID = function (request, response) {//gets json for specified student(
     });
 };
 
-exports.post = function (request, response) {
-    console.log('app.post(/logicalExpressions)');
-    var exp = new logicalModel({
-        booleanExp: request.body.logicalExpression.booleanExp,
-        logicalLink: request.body.logicalExpression.logicalLink,
-    });
-    exp.save(function (error) {
-        console.log('saving to database: ' + exp.booleanExp);
+exports.put = function (request, response) {
+    console.log('app.put(/programs/:program_id)');
+    // use our Posts model to find the post we want
+    logicalModel.findById(request.params.logicalExpression_id, function (error, logicalExpression) {
         if (error) {
             response.send({error: error});
         }
         else {
-            response.status(201).json({exp: exp});
+            logicalExpression.course = request.body.logicalExpression.course,
+            logicalExpression.minMark = request.body.logicalExpression.minMark,
+
+            logicalExpression.save(function (error) {
+                console.log('saving to database: ' + logicalExpression.minMark);
+                if (error) {
+                    response.send({error: error});
+                }
+                else {
+                    response.status(201).json({logicalExpression: logicalExpression});
+                }
+            });
+        }
+    });
+}
+
+
+exports.post = function (request, response) {
+    console.log('app.post(/logicalExpressions)');
+    var logicalExpression = new logicalModel({
+        course: request.body.logicalExpression.course,
+        minMark: request.body.logicalExpression.minMark,
+    });
+    logicalExpression.save(function (error) {
+        console.log('saving to database: ' + logicalExpression.minMark);
+        if (error) {
+            response.send({error: error});
+        }
+        else {
+            response.status(201).json({logicalExpression: logicalExpression});
         }
     });
 };

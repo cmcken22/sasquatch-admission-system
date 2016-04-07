@@ -1,52 +1,97 @@
 
 <br>
-<h4>{{thisStudent.firstName}} {{thisStudent.lastName}}'s ITR's</h4>
+<h4>{{thisStudent.firstName}} {{thisStudent.lastName}}'s ITRs</h4>
+
 {{#each thisStudent.itrs as |oneItr|}}
-        <div class="row">
+    <div class="row">
+        
+        <div class="large-10 columns">
             
-            
-            <div class="large-10 columns">
-                
-                Choice {{oneItr.order}} - {{oneItr.academicprogramcode.name}}
-                <br>
-                Eligibility: 
-                {{#if (eq oneItr.eligibility '1')}}
-                    Yes 
-                {{else}}
-                    No
-                {{/if}}
-            
-            </div>
-            
-            {{#if (eq currentITRedit oneItr.id)}}
-                <a href="#" class="button tiny" {{action 'deleteITR' oneItr}}>Delete</a>
+            Choice {{oneItr.order}} - {{oneItr.academicprogramcode.name}}
+            <br>
+            Eligible: 
+            {{#if (eq oneItr.eligibility '1')}}
+                Yes 
+            {{else}}
+                No
             {{/if}}
-               
-            <div class="large-2 columns">
-                {{#if (not-eq currentITRedit oneItr.id)}}
-                    <a href="#" class="button tiny" {{action 'setEdit' oneItr.id}}>Edit</a>
-                {{/if}}
-            </div>
+        
         </div>
-        <br>
+        
+        {{#if (eq currentITRedit oneItr.id)}}
+            <a href="#" class="button tiny" {{action 'deleteITR' oneItr}}>Delete</a>
+        {{/if}}
+           
+        <div class="large-2 columns">
+            {{#if (not-eq currentITRedit oneItr.id)}}
+                <a href="#" class="button tiny" {{action 'setEdit' oneItr.id}}>Edit</a>
+            {{/if}}
+        </div>
+        
+        {{#if (eq currentITRedit oneItr.id)}}
+            
+            <form id="add-student-form">
+                <p>
+                    <select onchange={{action "setProgram" value="target.value"}}>
+                        {{#each programModel as |oneProgram|}}
+                            {{#if (eq oneProgram.id oneItr.academicprogramcode.id)}}
+                                <option selected value={{oneProgram.id}}>{{oneProgram.name}}</option>
+                            {{else}}
+                                <option value={{oneProgram.id}}>{{oneProgram.name}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+                </p>
+                
+                <p>
+                    <select onchange={{action "setOrder" value="target.value"}}>
+                        {{#each choices as |choice|}}
+                            {{#if (eq choice order)}}
+                                <option selected value={{choice}}>{{choice}}</option>
+                            {{else}}
+                                <option value={{choice}}>{{choice}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+                </p>
+                
+                <p>
+                    <select onchange={{action "setEligibility" value="target.value"}}>
+                        {{#if (eq oneItr.eligibility '1')}}
+                            <option selected value = 1>Elligible</option>
+                            <option value = 0>Not Elligible</option>
+                        {{else}}
+                            <option  value = 1>Elligible</option>
+                            <option selected value = 0>Not Elligible</option>
+                        {{/if}}
+                    </select>
+                </p>
+                    
+            </form>
+            <a href="#" class="button radius" {{action 'editItr' oneItr.id}}>Save</a>
+            <a href="#" class="button radius" {{action 'setEdit'}}>Cancel</a>
+            
+        {{/if}}
+        
+    </div>
+<br>
 {{/each}}
 
 {{#if (eq thisStudent.itrs.length 0)}}
     <p>{{thisStudent.firstName}} {{thisStudent.lastName}} does not have a completed intent to register.</p>
-
+    
 {{/if}}
 
 
 {{#if (eq isAdding false)}}
-<a href="#" class="button radius" {{action 'addToggle'}}>Add ITR</a>
+    <a href="#" class="button radius" {{action 'addToggle'}}>Add ITR</a>
 {{/if}}
 
-
 {{#if (eq isAdding true)}}
-Add program choice
+<h5>Add program choice</h5>
 
     <form id="add-student-form">
-    
+    <p>
         <select onchange={{action "setProgram" value="target.value"}}>
             <option value=100>Select Program</option>
                     
@@ -54,11 +99,11 @@ Add program choice
                 <option value={{oneProgram.id}}>{{oneProgram.name}}</option>
             {{/each}}
         </select>
+        </p>
         
         
         
-        <br>
-        
+        <p>
         
         <select onchange={{action "setOrder" value="target.value"}}>
             <option value=100>Select Order Preference</option>
@@ -69,22 +114,19 @@ Add program choice
             <option value=5>5</option>
         </select>
     
-        <br>
+        </p>
+        <p>
         
         
-        
-        <select onchange={{action "setElligibility" value="target.value"}}>
+        <select onchange={{action "setEligibility" value="target.value"}}>
             <option value=100>Select Elligibility</option>
             <option value = 1>Elligible</option>
             <option value = 0>Not Elligible</option>
-            
         </select>
-        
-        
-        <br>
-            
+        </p>
+
     </form>
-    <a href="#" class="button radius" {{action 'addItr' programName}}>Save</a>
+    <a href="#" class="button radius" {{action 'addItr'}}>Save</a>
     <a href="#" class="button radius" {{action 'cancelAdd'}}>Cancel</a>
 
 {{/if}}

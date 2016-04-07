@@ -7,5 +7,4 @@ re-run the following code
 mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"
 
 TO RUN THE EMBER SERVER
-ember server --proxy https://ember-testing-rfreethy.c9users.io:8082
-
+ember server --proxy https://sasquatch-admission-system-cmcken22.c9users.io:8082

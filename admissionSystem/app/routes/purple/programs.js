@@ -6,14 +6,19 @@ export default Ember.Route.extend({
     
     edit: false,
     currentID: '0',
+    currentCode: '0',
+    
     
     model() {
-      return this.store.findAll('academicprogramcode');
+      return Ember.RSVP.hash({
+         program: this.store.findAll('academicprogramcode'),
+         commentCode: this.store.findAll('commentCode')
+      });
     },
     
-    actions:{
+    
 
-      
+    actions:{
       
         selectThis: function(id){
           if(this.controller.get('currentID') == id){
@@ -36,23 +41,7 @@ export default Ember.Route.extend({
           }
         },
         
-        updateProgramCode: function(id, n, c, sc){
-          
-          
-          var newName = n;
-          var code = c;
-          var subCode = sc;
-          var myStore = this.get('store');
-        
-          myStore.findRecord('academicprogramcode', id).then(function(academicprogramcode) {
-            academicprogramcode.set('name', newName);
-            academicprogramcode.set('code', code);
-            academicprogramcode.set('subCode', subCode);
-            academicprogramcode.save(); 
-            
-          });
-          this.controller.set('currentID', '0');
-        },
+
     }
       
 });

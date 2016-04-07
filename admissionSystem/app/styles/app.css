@@ -166,8 +166,19 @@ select{
     margin-bottom:10px;
 }
 /* Ouda's admin portal*/
+.center-align{
+    text-align:center;
+}
 ul.system-admin-buttons li a{
     color:white !important;
+}
+.login-panel{
+    background-color:rgba(78, 37, 131, 0.2) !important;
+    border:1px solid #ddd !important;
+    margin-top:30px !important;
+}
+.login-panel img{
+    padding:10px;
 }
 .admin-panel{
     background-color:rgba(78, 37, 131, 0.2) !important;
@@ -186,3 +197,35 @@ div.circle{
     float:left !important;
 }
 /*end of Ouda's admin portal*/
+
+
+.modal-fog {
+  background: rgba(30, 30, 30, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.modal-frame {
+  position: absolute;
+  top: 10%;
+  margin:0px calc(50% - 450px);
+  border: 1px solid #333;
+  background: #ddd;
+  height: auto;
+  width: 900px;
+}
+.modal-title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height:30px;
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+.modal-body {
+  margin-top: 40px;
+  padding: 5px;
+  overflow: scroll;
+}

@@ -14,10 +14,10 @@ export default Ember.Component.extend({
             // this.get('routing').transitionTo('gender');
         },
         uploadResidencies: function(e) {
-         alert(e.value.split(".").pop());
+         //alert(e.value.split(".").pop());
          if(e.value.split(".").pop()=="xlsx"){
           var files = e.files[0];
-          alert(files);
+          //alert(files);
             var reader = new FileReader();
             var name = files.name;
             var self = this;
@@ -28,7 +28,7 @@ export default Ember.Component.extend({
               
               /* DO SOMETHING WITH workbook HERE */
               var sheet = workbook.Sheets[workbook.SheetNames[0]];
-              alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
+              //alert(XLSX.utils.sheet_to_csv(sheet, {"FS": ","}));
               var csvFile = XLSX.utils.sheet_to_csv(sheet, {"FS": ","});
               self.send("papapa", csvFile);
           };
@@ -41,7 +41,7 @@ export default Ember.Component.extend({
             
             if(toLoad)
             {
-              alert("Loaded " + toLoad.name + " of size " + toLoad.size);
+              //alert("Loaded " + toLoad.name + " of size " + toLoad.size);
               
             }else
             {

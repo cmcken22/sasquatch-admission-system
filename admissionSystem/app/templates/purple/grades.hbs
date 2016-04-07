@@ -1,31 +1,112 @@
 <h2>Grades</h2>
 
-<ul class="circle">
+<h3>Search for a student</h3>
+<a href="#" class="button radius" {{action 'displayAll'}}>Display All</a>
+<a href="#" class="button radius" {{action 'searchByNum'}}>Search by Student Number</a>
+<a href="#" class="button radius" {{action 'searchByFirstName'}}>Search by Name</a>
+
+{{#if (eq searchByNum true)}}
+  <div class='row'>
+    <label>Enter Student Number
+      {{input value=num type="text"}}
+    </label>
+    <a href="#" class="button tiny" {{action 'searchNum' num}}>Search</a>
+    <a href="#" class="button tiny" {{action 'cancelSearch'}}>Cancel</a>
+  </div>
+{{/if}}
+
+{{#if (eq searchByFirstName true)}}
+  <div class='row'>
+    <label>Enter Name
+      {{input value=name type="text"}}
+    </label>
+    <a href="#" class="button tiny" {{action 'searchFirstName' name}}>Search</a>
+    <a href="#" class="button tiny" {{action 'cancelSearchFirstName'}}>Cancel</a>
+  </div>
+{{/if}}
+
+  
+{{#if searching}}
+  <div class="circle">
     <ul>
       {{#each studentModel as |oneStudent|}}
+      {{#if (eq num oneStudent.studentNum)}}
         <div class="row model-item">
           <div class="large-12 columns">
             <div class='row'>
               <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
             </div>
             {{#if (eq oneStudent.id currentID)}}
-              {{#each oneStudent.marks as |oneGrade|}}
-                <div class="large-12 columns">
-                  <div class="large-10 columns">
-                    {{oneGrade.course.name}} - {{oneGrade.mark}}
-                  </div>
-                <div class="large-2 columns">
-                  {{purple.delete-grade ID = oneGrade.id}}
-                </div>
-                  
+              {{purple.personal-grades thisStudent = oneStudent model = model}}
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+{{/if}}
+
+{{#if searchingFN}}
+  <div class="circle">
+    <ul>
+      {{#each model.student as |oneStudent|}}
+          
+      {{!--serach first only--}}
+      {{#if (eq count '0')}}
+        {{#if (eq fname oneStudent.firstName)}}
+            
+          <div class="row model-item">
+            <div class="large-12 columns">
+              <div class='row'>
+                <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
               </div>
-              {{/each}}
+              {{#if (eq oneStudent.id currentID)}}
+                  {{purple.personal-grades thisStudent = oneStudent model = model}}
+              {{/if}}
+            </div>
+          </div>
+      {{/if}}
+    {{/if}}
+    
+    {{!--serach first and last--}}
+    {{#if (eq count '1')}}
+      {{#if (and (eq fname oneStudent.firstName) (eq lname oneStudent.lastName))}}
+            <div class="row model-item">
+              <div class="large-12 columns">
+                <div class='row'>
+                  <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
+                </div>
+                {{#if (eq oneStudent.id currentID)}}
+                  {{purple.personal-grades thisStudent = oneStudent model = model}}
+                {{/if}}
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+    
+      
+      {{/each}}
+    </ul>
+  </div>
+{{/if}}
+
+{{#if (eq displayAll true) }}
+<div class="circle">
+      {{#each sortedStudents as |oneStudent|}}
+      {{!--{{#each studentModel as |oneStudent|}}--}}
+        <div class="row model-item">
+          <div class="large-12 columns">
+            <div class='row'>
+              <div class='editItem' {{action 'selectThis' oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</div>
+            </div>
+            {{#if (eq oneStudent.id currentID)}}
+              
+              {{purple.personal-grades thisStudent = oneStudent model = model}}
+              
             {{/if}}
           </div>
         </div>
       {{/each}}
-    </ul>
-</ul>
-
-{{purple.add-grade model = model}}
-
+</div>
+{{/if}}

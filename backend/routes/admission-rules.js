@@ -35,8 +35,7 @@ exports.put = function (request, response) {
         }
         else {
             admissionRule.description = request.body.admissionRule.description;
-            admissionRule.course = request.body.admissionRule.course;
-            admissionRule.minMark = request.body.admissionRule.minMark;
+            admissionRule.expressions = request.body.admissionRule.expressions;
 
             admissionRule.save(function (error) {
                 console.log('saving to database: ' + admissionRule.description);
@@ -58,8 +57,6 @@ exports.post = function (request, response) {
     console.log('app.post(/admissionRules)');
     var admissionRule = new admissionRuleModel({
         description: request.body.admissionRule.description,
-        course: request.body.admissionRule.course,
-        minMark: request.body.admissionRule.minMark
     });
     admissionRule.save(function (error) {
         console.log('saving to database: ' + admissionRule.description);

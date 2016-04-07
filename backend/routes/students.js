@@ -24,15 +24,16 @@ exports.getID = function (request, response) {//gets json for specified student(
         }
         else {
             json.student = student;
-            gradeModel.find({"student": request.params.student_id}, function (error, marks) {
+            // gradeModel.find({"student": request.params.student_id}, function (error, marks) {
                 
-                if(marks.length >= 1){
-                    json.student.marks = marks;
-                    response.json(json);
-                }else{
-                    response.json(json);
-                }
-            });
+            //     if(marks.length >= 1){
+            //         console.log(marks);
+            //         json.student.marks = "" + marks;
+            //         response.json(json);
+            //     }else{
+            //         response.json(json);
+            //     }
+            // });
         };
     });
     
@@ -109,7 +110,7 @@ exports.put = function (request, response) {
             student.country = request.body.student.country;
             student.province = request.body.student.province;
             student.city = request.body.student.city;
-            student.marks = request.body.student.marks;
+            student.grades = request.body.student.grades;
             //ITRList: [];
         
             

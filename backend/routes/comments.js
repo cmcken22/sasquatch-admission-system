@@ -2,7 +2,6 @@ var commentCodeModel = require('../models/comment-code');
 
 exports.get = function (request, response) {
     console.log('app.get(/commentCodes)');
-    console.log(request.params);
     commentCodeModel.find(function (error, commentCode) {
         if (error) {
             response.send({error: error});
@@ -15,7 +14,6 @@ exports.get = function (request, response) {
 
 exports.getID = function (request, response) {//gets json for specified student(by ID)
     console.log('app.get(/commentCodes/:commentCode_id)');
-    console.log(request.params);
     commentCodeModel.findById(request.params.commentCode_id, function (error, commentCode) {
         if (error) {
             response.send({error: error});

@@ -25,6 +25,77 @@
                 </label>
             </div>
         </div>
+                 <div class="row">
+            <div class="large-12 columns">
+            {{!--------------------------SELECT RES---------------------------}}
+                <select onchange={{action "setRes" value="target.value"}}>
+                    <option value=99>Select Residency</option>
+                        {{#each resModel as |oneRes|}}
+                            <option value={{oneRes.id}}>{{oneRes.residency}}</option>
+                        {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!------------------------SELECT GENDER--------------------------}}
+            <select onchange={{action "setSex" value="target.value"}}>
+                        <option value=100>Select Gender</option>
+                      {{#each gendersModel as |oneGender|}}
+                            <option value={{oneGender.id}}>{{oneGender.sex}}</option>
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!--------------------------SELECT LOAD--------------------------}}       
+            <select onchange={{action "setLoad" value="target.value"}}>
+                        <option value=100>Select Load</option>
+                      {{#each loadModel as |oneload|}}
+                        <option value={{oneload.id}}>{{oneload.load}}</option>
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        
+        <div class="row">
+            <div class="large-12 columns">
+            {{!------------------------SELECT COUNTRY-------------------------}}
+            <select onchange={{action "setCountry" value="target.value"}}>
+                        <option value=100>Select Country</option>
+                      {{#each countryModel as |oneCountry|}}
+                        <option value={{oneCountry.id}}>{{oneCountry.name}}</option>
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!-----------------------SELECT PROVINCE-------------------------}}
+            <select onchange={{action "setProvince" value="target.value"}}>
+                        <option value=100>Select Province</option>
+                      {{#each provinceModel as |oneProvince|}}
+                            {{#if (eq oneProvince.country.id country)}}
+                            <option value={{oneProvince.id}}>{{oneProvince.name}}</option>
+                            {{/if}}
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="large-12 columns">
+            {{!--------------------------SELECT CITY--------------------------}}
+            <select onchange={{action "setCity" value="target.value"}}>
+                        <option value=100>Select City</option>
+                      {{#each cityModel as |oneCity|}}
+                            {{#if (eq oneCity.province.id province)}}
+                            <option value={{oneCity.id}}>{{oneCity.name}}</option>
+                            {{/if}}
+                      {{/each}}
+                </select>
+            </div>
+        </div><br>
         <div class="row">
             <div class="large-12 columns">
                 <label>Date of Birth</label>
@@ -77,55 +148,28 @@
     </form>
     <br>
     <a href="#" class="button radius" {{action 'save' selectedStudent.id day month year}}>Save</a>
-    <a href="#" class="button radius" {{action 'cancel'}}>Cancel</a>
+    <a href="#" class="button radius" {{action 'edit'}}>Cancel</a>
 {{else}}
     <ul class="square">
         <ul>
-            <p>{{selectedStudent.firstName}} {{selectedStudent.lastName}}</p>
-            <p>{{selectedStudent.studentNum}}</p>
-            <p>{{selectedStudent.DOB}}</p>
-            <p>{{selectedStudent.gender.sex}}</p>
-            <p>{{selectedStudent.residency.residency}}</p>
-            <p>{{selectedStudent.load.load}}</p>
-            <p>{{selectedStudent.city.name}} {{selectedStudent.city.province.name}} {{selectedStudent.city.province.country.name}}</p>
+            <p>{{selectedStudent.firstName}} {{selectedStudent.lastName}} - {{selectedStudent.studentNum}}<br>
+            {{#if selectedStudent.gender}}{{selectedStudent.gender.sex}}<br>{{/if}}
+            Date of Birth: {{selectedStudent.DOB}}<br>
+            {{#if selectedStudent.city}}{{selectedStudent.city.name}}, {{selectedStudent.city.province.name}}, {{selectedStudent.city.province.country.name}}<br>{{/if}}
+            {{#if selectedStudent.residency}}Residency: {{selectedStudent.residency.residency}}<br>{{/if}}
+            {{#if selectedStudent.load}}Academic Load: {{selectedStudent.load.load}}{{/if}}</p>
         </ul>
     </ul>
-    
-    <a href="#" class="button radius" {{action 'edit' selectedStudent.DOB}}>Edit</a>
     <a href="#" class="button radius" {{action 'cancel'}}>Back</a>
-    <br>
-    {{#if (eq viewGrades false)}}<a href="#" class="button radius" {{action 'viewGrades'}}>View Grades</a>{{/if}}
-    <br>
-    {{#if viewGrades}}
-        {{#if selectedStudent.marks.length}}
-            <h4>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s Grades</h4>
-            {{#each selectedStudent.marks as |oneGrade|}}
-                <p>{{oneGrade.course.name}} - {{oneGrade.mark}}</p>
-            {{/each}}
-            <a href="#" class="button radius" {{action 'viewGrades'}}>Hide Grades</a>
-        {{/if}}
+    {{#if MST01IsPermitted }}
+        <a href="#" class="button radius" {{action 'edit' selectedStudent.DOB}}>Edit</a>
+    {{else}}
+        <p>You don't have the permission to edit Student Info</p>
     {{/if}}
-    {{#if (eq viewITR false)}}<a href="#" class="button radius" {{action 'viewITR'}}>View ITRS</a>{{/if}}
-    {{#if viewITR}}
-        {{!--{{#if selectedStudent.itrs.length}}--}}
-        {{!--    <h4>{{selectedStudent.firstName}} {{selectedStudent.lastName}}'s ITR's</h4>--}}
-        {{!--    {{#each selectedStudent.itrs as |oneITR|}}--}}
-        {{!--        <p>Choice {{oneITR.order}} - {{oneITR.academicprogramcode.name}}</p>--}}
-        {{!--    {{/each}}--}}
-            
-
-        {{!--    <a href="#" class="button radius" {{action 'viewITR'}}>Hide ITRS</a>--}}
-        {{!--{{else}}--}}
-        {{!--    {{selectedStudent.firstName}} {{selectedStudent.lastName}} does not have any ITRs--}}
-        {{!--    <br>--}}
-        {{!--{{/if}}--}}
-        <br>
-        {{purple.manage-itrs thisStudent = selectedStudent model = model}}
-    {{/if}}
-    {{!--<a href="#" class="button radius" {{action 'addingGrade'}}>Add Grade</a>--}}
-    {{!--{{#if isAddingGrade}}--}}
-    {{!--    {{purple.add-grade}}--}}
-    {{!--{{/if}}--}}
+    
+    <br>
+    <br>
+    {{personal-page thisStudent = selectedStudent MST01IsPermitted = MST01IsPermitted}}
     
     
 {{/if}}

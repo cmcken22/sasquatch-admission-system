@@ -1,0 +1,50 @@
+<div class="panel callout admin-panel">
+    
+<ul class="button-group even-3 system-admin-buttons">
+    <li> <a href="#" class="button secondary" {{action 'selectGrades'}}>Grades</a></li>
+    <li> <a href="#" class="button secondary" {{action 'selectITR'}}>ITRs</a></li>
+    <li> <a href="#" class="button secondary"  {{action 'selectResults'}}>Distribution Results</a></li>
+</ul>
+
+
+{{#if showGrades}}
+    
+    {{purple.personal-grades thisStudent = thisStudent model = model MST01IsPermitted = MST01IsPermitted}}
+
+{{/if}}
+
+{{#if showITR}}
+
+    {{purple.manage-itrs thisStudent = thisStudent model = model}}
+
+{{/if}}
+
+{{#if showResults}}
+
+<div class="circle">
+  <h4>{{thisStudent.firstName}} {{thisStudent.lastName}}'s Distribution Results</h4>
+      {{#each distributionResultModel as |oneResult|}}
+        {{#if (eq oneResult.student.id thisStudent.id)}}
+          <div class="row model-item">
+            <div class="large-10 columns">
+                <p>{{oneResult.student.firstName}} {{oneResult.student.lastName}}</p>
+                <p> Comment Code: {{oneResult.comment.code}}<br>
+                Description: {{oneResult.comment.description}}</p>
+                {{#if oneResult.failReason}}<p>Fail Reason: {{oneResult.failReason}}</p>{{/if}}
+                <p> Date: {{oneResult.date}}</p>
+              </div>
+              <div class="large-2 columns">
+                <a href="#" class="button tiny" {{action 'deleteResult' oneResult}}>Delete</a>
+              </div>
+            </div>
+          {{/if}}
+      {{/each}}
+</div>
+
+
+
+
+{{/if}}
+
+
+</div>

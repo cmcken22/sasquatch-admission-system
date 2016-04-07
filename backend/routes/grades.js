@@ -26,6 +26,33 @@ exports.getID = function (request, response) {//gets json for specified student(
 };
 
 
+
+exports.put = function (request, response) {
+    console.log('app.put(/grade/:grade_id)');
+    // use our Posts model to find the post we want
+    gradeModel.findById(request.params.grade_id, function (error, grade) {
+        if (error) {
+            response.send({error: error});
+        }
+        else {
+            
+
+            grade.mark = request.body.grade.mark,
+
+          
+            grade.save(function (error) {
+                console.log('saving to database: ' + grade.mark);
+                if (error) {
+                    response.send({error: error});
+                }
+                else {
+                    response.status(201).json({grade: grade});
+                }
+            });
+        }
+    });
+}
+
 exports.post = function (request, response) {
     console.log('app.post/grades/:grade_id)');
     var grade = new gradeModel({

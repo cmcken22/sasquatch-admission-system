@@ -1,21 +1,5 @@
 <h2>Intent To Register</h2>
 
-{{!--{{purple.display-itr model = model}}--}}
-{{!--{{purple.add-itr model = model}}--}}
-
-
-{{!--<div class="row">--}}
-{{!--    <div class="large-12 columns">--}}
-{{!--    <select onchange={{action "setStudent" value="target.value"}}>--}}
-{{!--                <option value=100>Select Student</option>--}}
-{{!--              {{#each model.student as |oneStudent|}}--}}
-{{!--                    <option value={{oneStudent.id}}>{{oneStudent.firstName}} {{oneStudent.lastName}}</option>--}}
-{{!--              {{/each}}--}}
-{{!--        </select>--}}
-{{!--    </div>--}}
-{{!--</div><br>--}}
-
-
 <h3>Search for a student</h3>
 <a href="#" class="button radius" {{action 'displayAll'}}>Display All</a>
 <a href="#" class="button radius" {{action 'searchByNum'}}>Search by Student Number</a>
@@ -136,7 +120,8 @@
 
 {{#if (eq displayAll true) }}
 <div class="circle">
-    {{#each model.student as |oneStudent|}}
+    {{#each sortedStudents as |oneStudent|}}
+    {{!--{{#each model.student as |oneStudent|}}--}}
       <div class="row model-item">
         
         <div class="large-10 columns">
@@ -160,6 +145,10 @@
 </div>
 {{/if}}
 
+{{!--<p>++++SORT++++</p>--}}
+{{!--{{#each sortedStudents as |s|}}--}}
+{{!--{{s.firstName}}--}}
+{{!--{{/each}}--}}
 
 {{!--{{#each model.student as |oneStudent|}}--}}
     

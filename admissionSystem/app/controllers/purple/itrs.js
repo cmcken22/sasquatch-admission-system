@@ -19,7 +19,13 @@ export default Ember.Controller.extend({
     first: '',
     last: '',
     
+    sortedStudents: function(){
+      var model = this.get('model.student').sortBy('firstName');
+      return model;
+    }.property('model'),  
+    
     actions: {    
+      
       setStudent(student){
           if(this.get('student') === student){
             this.set('student', '100');
@@ -27,6 +33,7 @@ export default Ember.Controller.extend({
               this.set('student', student);
           }
       },
+      
       
     deleteItr: function(id){
       var myStore = this.get('store');
@@ -38,14 +45,12 @@ export default Ember.Controller.extend({
       }
     },
     
-    
-    
-    searchByNum: function(){
-            this.set('searchByNum', true);
-            this.set('displayAll', false);
-            this.set('searchByFirstName', false);
-            this.set('searchingFN', false);
-        },
+      searchByNum: function(){
+          this.set('searchByNum', true);
+          this.set('displayAll', false);
+          this.set('searchByFirstName', false);
+          this.set('searchingFN', false);
+      },
         
         searchNum: function(num){
             this.set('num', num);

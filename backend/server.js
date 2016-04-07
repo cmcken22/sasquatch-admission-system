@@ -108,6 +108,7 @@ app.get('/itrs', itr.get);
 app.get('/itrs/:itr_id', itr.getID);
 app.post('/itrs', itr.post);
 app.delete('/itrs/:itr_id', itr.delete);
+app.put('/itrs/:itr_id', itr.put);
 
 //===========================Term Code Route==================================//
 
@@ -178,6 +179,7 @@ app.delete('/commentCodes/:commentCode_id', comment.delete);
 var grade = require('./routes/grades');
 app.get('/grades', grade.get);
 app.get('/grades/:grade_id', grade.getID);
+app.put('/grades/:grade_id', grade.put);
 app.post('/grades', grade.post);
 app.delete('/grades/:grade_id', grade.delete);
 
@@ -202,6 +204,7 @@ app.delete('/distributionResults/:distributionResult_id', distributionResult.del
 var logicalExpression = require('./routes/logical-expressions');
 app.get('/logicalExpressions', logicalExpression.get);
 app.get('/logicalExpressions/:logicalExpression_id', logicalExpression.getID);
+app.put('/logicalExpressions/:logicalExpression_id', logicalExpression.put);
 app.post('/logicalExpressions', logicalExpression.post);
 app.delete('/logicalExpressions/:logicalExpression_id', logicalExpression.delete);
 

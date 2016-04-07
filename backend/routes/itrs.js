@@ -26,6 +26,7 @@ exports.getID = function (request, response) {//gets json for specified student(
 };
 
 exports.post = function (request, response) {
+    console.log('app.post(/itrs)');
     var itr = new itrModel({
         academicprogramcode: request.body.itr.academicprogramcode,
         student: request.body.itr.student,
@@ -43,6 +44,37 @@ exports.post = function (request, response) {
         }
     });
 };
+
+exports.put = function (request, response) {
+    console.log('app.put(/itrs/:itr_id)');
+    // use our Posts model to find the post we want
+    itrModel.findById(request.params.itr_id, function (error, itr) {
+        if (error) {
+            response.send({error: error});
+        }
+        else {
+            
+            console.log("**********" + request.body.itr.order);
+            console.log("**********" + request.body.itr.eligibility);
+            console.log("**********" + request.body.itr.academicprogramcode);
+            
+            itr.order = request.body.itr.order;
+            itr.eligibility = request.body.itr.eligibility;
+            itr.academicprogramcode = request.body.itr.academicprogramcode;
+            
+            itr.save(function (error) {
+                console.log('saving to database: ' + itr.id);
+                if (error) {
+                    response.send({error: error});
+                }
+                else {
+                    response.status(201).json({itr: itr});
+                }
+            });
+            
+        }
+    });
+}
 
 exports.delete = function (request, response) {
     console.log('app.delete(/itrs/:itr_id)');

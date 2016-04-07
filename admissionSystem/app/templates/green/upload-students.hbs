@@ -1,2 +1,8 @@
 <h2>Upload Student Data</h2>
-{{green.student-file}}
+
+{{#if MST01IsPermitted}}
+    {{green.student-file}}
+{{else}}
+    <p>You do not have the permission to Upload student files (MST01)</p><br>
+    <p>Contact an administrator</p>
+    {{/if}}

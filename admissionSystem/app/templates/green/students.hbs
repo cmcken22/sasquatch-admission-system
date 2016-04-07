@@ -14,6 +14,7 @@
 {{/if}}
 
 {{#if searchByFirstName}}
+
   <div class='row'>
     <label>Enter Name
       {{input value=name type="text"}}
@@ -29,17 +30,30 @@
     <ul>
       {{#each model.students as |oneStudent|}}
           {{#if (eq num oneStudent.studentNum)}}
-          <div class="large-6 columns">
-              <li>
-    
-                {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
-                {{/link-to}}
-                
-              </li>
-          </div>
-          <div class="large-6 columns">
-            {{green.delete-student ID=oneStudent.id}}
-          </div>
+           {{#if MST01IsPermitted}}
+           
+              <div class="large-6 columns">
+                  <li>
+        
+                    {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                    {{/link-to}}
+                    
+                  </li>
+              </div>
+              <div class="large-6 columns">
+                {{green.delete-student ID=oneStudent.id}}
+              </div>
+              {{else}}
+              <p>You don't have permission to delete students</p>
+              <div class="large-12 columns">
+                  <li>
+        
+                    {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                    {{/link-to}}
+                    
+                  </li>
+              </div>
+              {{/if}}
           <div></div>
           {{/if}}
       {{/each}}
@@ -48,41 +62,73 @@
 {{/if}}
 
 {{#if searchingFN}}
+
   <ul class="circle">
     <ul>
+      
       {{#each model.students as |oneStudent|}}
+      
           {{!--serach first only--}}
           {{#if (eq count '0')}}
             {{#if (eq fname oneStudent.firstName)}}
-            <div class="large-10 columns">
-                <li>
-      
-                  {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
-                  {{/link-to}}
-                  
-                </li>
-            </div>
-            <div class="large-2 columns">
-              {{green.delete-student ID=oneStudent.id}}
-            </div>
+            {{#if MST01IsPermitted}}
+                <div class="large-6 columns">
+                    <li>
+          
+                      {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                      {{/link-to}}
+                      
+                    </li>
+                </div>
+                <div class="large-6 columns">
+                  {{green.delete-student ID=oneStudent.id}}
+                </div>
+              {{else}}
+               
+                <div class="large-12 columns">
+                    <li>
+          
+                      {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                      {{/link-to}}
+                      
+                    </li>
+                </div>
+                
+            
+              {{/if}}
             <div></div>
             {{/if}}
           {{/if}}
           {{!--serach first and last--}}
           {{#if (eq count '1')}}
             {{#if (and (eq fname oneStudent.firstName) (eq lname oneStudent.lastName))}}
-            <div class="large-6 columns">
-                <li>
-      
-                  {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
-                  {{/link-to}}
-                  
-                </li>
-            </div>
-            <div class="large-6 columns">
-              {{green.delete-student ID=oneStudent.id}}
-            </div>
+              {{#if MST01IsPermitted}}
+                <div class="large-6 columns">
+                    <li>
+          
+                      {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                      {{/link-to}}
+                      
+                    </li>
+                </div>
+                <div class="large-6 columns">
+                  {{green.delete-student ID=oneStudent.id}}
+                </div>
+              {{else}}
+                <div class="large-12 columns">
+                    <li>
+          
+                      {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                      {{/link-to}}
+                      
+                    </li>
+                </div>
+                
+
+            
+              {{/if}}
             <div></div>
+            
             {{/if}}
           {{/if}}
           
@@ -93,20 +139,48 @@
 {{/if}}
 
 {{#if displayAll}}
-<ul class="circle">
-  <ul>
-    {{#each model.students as |oneStudent|}}
-        <div class="large-6 columns">
-            <li>
-              {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
-              {{/link-to}}
-            </li>
-        </div>
-        <div class="large-6 columns">
-          {{green.delete-student ID=oneStudent.id}}
-        </div>
-        <div></div>
-    {{/each}}
-  </ul>
-</ul>
+  {{#if MST01IsPermitted}}
+  
+    <ul class="circle">
+      <ul>
+        {{!--{{#each model.students as |oneStudent|}}--}}
+        {{#each sortedStudents as |oneStudent|}}
+            <div class="large-6 columns">
+                <li>
+                  {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                  {{/link-to}}
+                </li>
+            </div>
+            
+            <div class="large-6 columns">
+              
+              {{green.delete-student ID=oneStudent.id}}
+              
+            </div>
+            <div></div>
+        {{/each}}
+      </ul>
+    </ul>
+    
+ {{else}}
+ 
+    <p>You do not have permission to delete students</p>
+    <ul class="circle">
+      <ul>
+        {{#each sortedStudents as |oneStudent|}}
+        {{!--{{#each model.students as |oneStudent|}}--}}
+            <div>
+              <div class="large-12 columns">
+                <li>
+                  {{#link-to 'green.student' oneStudent.id}} {{oneStudent.firstName}} {{oneStudent.lastName}}
+                  {{/link-to}}
+                </li>
+              </div>
+            </div>
+        {{/each}}
+      </ul>
+    </ul>
+    
+ {{/if}}
+ 
 {{/if}}

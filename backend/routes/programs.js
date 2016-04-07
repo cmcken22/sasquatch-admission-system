@@ -36,7 +36,9 @@ exports.put = function (request, response) {
             academicprogramcode.name = request.body.academicprogramcode.name;
             academicprogramcode.code = request.body.academicprogramcode.code;
             academicprogramcode.subCode = request.body.academicprogramcode.subCode;
+            academicprogramcode.acceptionCode = request.body.academicprogramcode.acceptionCode;
             academicprogramcode.rules = request.body.academicprogramcode.rules;
+            academicprogramcode.minAverage = request.body.academicprogramcode.minAverage;
             academicprogramcode.save(function (error) {
                 console.log('saving to database: ' + academicprogramcode.name);
                 if (error) {
