@@ -4,7 +4,7 @@ export function calculateAVG(student) {
     
     var gradesArray = new Array();
     
-    student.get('marks').forEach(function(marks){
+    student.get('grades').forEach(function(marks){
         gradesArray.push(marks);
     });
     
